@@ -22,7 +22,7 @@ namespace RecallOnTimeMVC
         {
             HttpClient client = new HttpClient();
 
-            client.BaseAddress = new Uri("http://localhost:28951/");//设置http请求的地址
+            client.BaseAddress = new Uri("http://localhost:5646/");//设置http请求的地址
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));//设置请求的数据传输格式
 
             HttpContent content = new StringContent(data);
