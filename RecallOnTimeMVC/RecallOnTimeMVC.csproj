@@ -124,6 +124,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Common\EnumHelper.cs" />
     <Compile Include="Common\HttpClientHelper.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LmqMVCController.cs" />
@@ -1034,7 +1035,11 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\LmqMVC\Index.cshtml" />
+    <Content Include="Views\LmqMVC\AddMovie.cshtml" />
+    <Content Include="Views\LmqMVC\ShowMovie.cshtml" />
+    <Content Include="Views\LmqMVC\ShowMovieById.cshtml" />
+    <Content Include="Views\LmqMVC\AddMovieHall.cshtml" />
+    <Content Include="Views\LmqMVC\ShowMovieHall.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
