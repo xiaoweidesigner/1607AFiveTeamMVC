@@ -127,6 +127,7 @@
     <Compile Include="App_Start\FilterConfig2.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\RouteConfig2.cs" />
+    <Compile Include="Common\Employee.cs" />
     <Compile Include="Common\HttpClientHelper.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LmqMVCController.cs" />
@@ -1153,6 +1154,8 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\WangLuChao\Index.cshtml" />
     <Content Include="Views\LmqMVC\Index.cshtml" />
+    <Content Include="Views\WangLuChao\AddDepartMent.cshtml" />
+    <Content Include="Views\WangLuChao\AddEmployee.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

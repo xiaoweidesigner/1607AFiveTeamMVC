@@ -40,16 +40,24 @@ namespace RecallOnTimeMVC.Controllers
         {
             return View();
         }
+        public void ShopXia()
+        {
+            string sn = HttpClientHelpers.Send("get", "/api/WangLuChao/ShowDepartMent", null);
+
+            List<DepartMent> list = JsonConvert.DeserializeObject<List<DepartMent>>(sn);
+
+            ViewBag.DId = new SelectList(list, "DId", "D_Name");
+        }
+
         [HttpGet]
         public ActionResult AddEmployee()
         {
-
+            ShopXia();
             return View();
         }
         [HttpPost]
         public ActionResult AddEmployee(Employee mm, HttpPostedFileBase file)
         {
-
             string ee = Server.MapPath("/employImg/");
             string filename = DateTime.Now.ToString("yyyyMMddHHmmss") + file.FileName;
             file.SaveAs(ee + filename);
