@@ -25,7 +25,9 @@
             <tr>
                 <td><label class="layui-form-label">部门</label></td>
                 <td lay-search="">
-                    @Html.DropDownList("D_Name", ViewBag.DId as IEnumerable<SelectListItem>, "直接选择或搜索选择", new Dictionary<string, object> { { "lay-search", "" }, { "lay-verify", "required" } })
+                    <select id="Select1" name="DID">
+                        <option>==请选择部门==</option>
+                    </select>
                 </td>
             <tr>
                 <td>

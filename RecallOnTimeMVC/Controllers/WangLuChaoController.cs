@@ -25,6 +25,7 @@ namespace RecallOnTimeMVC.Controllers
         [HttpPost]
         public void AddDepartMent(DepartMent mm)
         {
+           
             string json = JsonConvert.SerializeObject(mm);
             string result = HttpClientHelpers.Send("post", "/api/WangLuChao/AddDepartMent", json);
             if (Convert.ToInt32(result) > 0)
