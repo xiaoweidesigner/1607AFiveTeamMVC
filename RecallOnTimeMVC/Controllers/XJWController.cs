@@ -34,7 +34,19 @@ namespace RecallOnTimeMVC.Controllers
         }
         #endregion
         #region 顾客列表显示
+
+        //所有顾客
         public ActionResult ShowCustom()
+        {
+            return View();
+        }
+        //普通顾客
+        public ActionResult ShowCommonCustom()
+        {
+            return View();
+        }
+        //会员
+        public ActionResult ShowHYCustom()
         {
             return View();
         }
@@ -56,6 +68,13 @@ namespace RecallOnTimeMVC.Controllers
                 list = list.Where(s => s.C_State == C_State).ToList();
             }
             return JsonConvert.SerializeObject(list);
+        }
+        //充值方法
+        public int CZ(float C_integral, int CId)
+        {
+            string jsonResult = HttpClientHelper.SendRequest($"api/Xjw/CZ?C_integral={C_integral}&CId={CId}", "get");
+            int result = JsonConvert.DeserializeObject<int>(jsonResult);
+            return result;
         }
         #endregion
     }

@@ -1170,6 +1170,9 @@
     <Content Include="Views\LmqMVC\Index.cshtml" />
     <Content Include="Views\XJW\Login.cshtml" />
     <Content Include="Views\XJW\ShowCustom.cshtml" />
+    <Content Include="Views\XJW\CeShi.cshtml" />
+    <Content Include="Views\XJW\ShowCommonCustom.cshtml" />
+    <Content Include="Views\XJW\ShowHYCustom.cshtml" />
     <Content Include="Views\WangLuChao\AddDepartMent.cshtml" />
     <Content Include="Views\WangLuChao\AddEmployee.cshtml" />
     <Content Include="Views\WangLuChao\ShowEmployee.cshtml" />
