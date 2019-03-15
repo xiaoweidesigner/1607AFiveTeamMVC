@@ -1,0 +1,53 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>追忆后台管理系统</title>
+    <link href="~/cpts_639_ccb/public/css/base.css" rel="stylesheet" />
+    <link href="~/cpts_639_ccb/public/css/login.css" rel="stylesheet" />
+</head>
+<body>
+    <form action="/XJW/Login" method="post" id="form">
+        <h2 style="width:500px;height:300px;font-size:55px;color:white;line-height:300px;margin:0 auto;" >追忆后台管理系统</h2>
+        <div class="login_form">
+            <div class="user">
+                <input class="text_value" value="" name="E_Account" type="text" />
+                <input class="text_value" value="" name="E_Pwd" type="password" />
+            </div>
+            <button class="button" id="submit" type="submit">登录</button>
+        </div>
+    </form>
+</body>
+</html>
+<script>var basedir = 'cpts_639_ccb/public/ui/';</script>
+<script src="~/cpts_639_ccb/public/ui/do.js"></script>
+<script src="~/cpts_639_ccb/public/ui/config.js"></script>
+<script>
+    Do.ready('form', function () {
+        $("#form").Validform({
+            ajaxPost: true,
+            postonce: true,
+            tiptype: function (msg, o, cssctl) {
+                if (!o.obj.is("form")) {
+                    var objtip = o.obj.siblings(".Validform_checktip");
+                    cssctl(objtip, o.type);
+                    objtip.text(msg);
+                } else {
+                    var objtip = o.obj.find("#tip");
+                    cssctl(objtip, o.type);
+                    if (o.type == 2) {
+                        window.location.href = 'index.php?r=admin/index/index';
+                    } else {
+                        objtip.text(msg);
+                    }
+                }
+            }
+        });
+    });
+</script>

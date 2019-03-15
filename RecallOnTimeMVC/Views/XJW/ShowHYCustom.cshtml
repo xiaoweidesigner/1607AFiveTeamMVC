@@ -1,0 +1,106 @@
+﻿
+@{
+    ViewBag.Title = "ShowHYCustom";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<table class="layui-table" lay-skin="line">
+    <thead>
+        <tr>
+            <th>编号</th>
+            <th>名称</th>
+            <th>手机号</th>
+            <th>积分</th>
+            <th>金额</th>
+            <th>头像</th>
+            <th>级别</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody id="th"></tbody>
+</table>
+<div id="demo1"></div>
+<script>
+    $().ready(function () {
+        layui.use(['laypage', 'layer'], function () {
+            var laypage = layui.laypage;
+            $.ajax({
+                url: "/XJW/MethodShow?C_State=2",
+                type: "get",
+                dataType: "json",
+                success: function (data) {
+                    $("#th").empty();
+                    for (var i = 0; i < data.length; i++) {
+                        //调用分页
+                        laypage.render({
+                            elem: 'demo1'
+                            , count: data.length
+                            , limit: 5
+                            , jump: function (obj) {
+                                //模拟渲染
+                                document.getElementById('th').innerHTML = function () {
+                                    var arr = []
+                                        , thisData = data.concat().splice(obj.curr * obj.limit - obj.limit, obj.limit);
+                                    layui.each(thisData, function (index, item) {
+                                        var result = "";
+                                        if (item.C_State == 1) {
+                                            result = "<td>普通顾客<input type='button' value='加入会员' class='layui-btn layui-btn-normal layui-btn-sm' onclick='CZ(" + item.CId + ")' /> </td>";
+                                        } else {
+                                            result = "<td>会员</td>";
+                                        }
+                                        arr.push("<tr><td>" + item.CId + "</td><td>" + item.C_Name + "</td><td>" + item.C_Cellphone + "</td><td>" + item.C_EndTime + "</td><td>" + item.integral + "</td><td><img src='" + item.Photo + "' width='50' height='50' class='layui-circle' /></td>" + result + "<td><button class='layui-btn layui-btn-normal layui-btn-sm' onclick='CZ(" + item.CId + ")' ><i class='layui-icon'></i>充值</button></td></tr>");
+                                    });
+                                    return arr.join('');
+                                }();
+                            }
+                        });
+                    }
+                }
+            })
+        })
+    })
+    //弹出层
+    function CZ(Id) {
+        var str = "<table class='layui-table' lay-skin='line' style='line-height:50px;' ><tr><td><input type='radio' name='JinE' value='50' />50元</td><td><input type='radio' name='JinE' value='100' />100元</td><td style='width:20%' ><input type='radio' name='JinE' value='150' />150元</td></tr><tr><td><input type='radio' name='JinE' value='200' />200元</td><td><input type='radio' name='JinE' value='300' />300元</td><td><input type='radio' name='JinE' value='500' />500元</td></tr>";
+        str += "<tr><td>请输入充值金额:</td><td><input type='text' name='JinE' id='JinE' /></td><td><input type='button' class='layui-btn layui-btn-sm layui-btn-normal' value='充值' onclick='BeginCZ('" + Id + "')' /></td></tr></table>";
+        layer.open(
+            {
+                type: 1,
+                title: "请选择充值金额/手动输入",
+                content: str,
+                area: ["450px", "300px"],
+            });
+    }
+    //开始充值
+    function BeginCZ(Id) {
+        debugger;
+        var JinE1 = $("input[type='radio']:checked").val();
+        var JinE2 = $("#JinE").val();
+        var Result = 0;
+        if (JinE1 != "" && JinE2 != "") {
+            alert('请不要同时使用两种充值方式');
+        }
+        else {
+            if (JinE1 != "" && JinE2 == "") {
+                Result = JinE1;
+            }
+            if (JinE1 == "" && JinE2 != "") {
+                Result = JinE2;
+            }
+            $.ajax({
+                url: "hXjw/CZ?C_integral=" + Result + "&CId=" + Id,
+                type: "get",
+                dataType: "json",
+                success: function (data) {
+                    if (data > 0) {
+                        alert('充值成功');
+                        window.onload();
+                    }
+                    else {
+                        alert('充值失败');
+                    }
+                }
+            })
+        }
+    }
+</script>
