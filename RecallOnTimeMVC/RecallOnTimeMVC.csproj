@@ -1052,6 +1052,9 @@
     <Content Include="Views\LmqMVC\Index.cshtml" />
     <Content Include="Views\XJW\Login.cshtml" />
     <Content Include="Views\XJW\ShowCustom.cshtml" />
+    <Content Include="Views\XJW\CeShi.cshtml" />
+    <Content Include="Views\XJW\ShowCommonCustom.cshtml" />
+    <Content Include="Views\XJW\ShowHYCustom.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
