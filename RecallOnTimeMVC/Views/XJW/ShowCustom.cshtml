@@ -1,0 +1,68 @@
+﻿<script src="~/Scripts/jquery-3.3.1.js"></script>
+@{
+    ViewBag.Title = "ShowCustom";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<table class="layui-table" lay-skin="line" >
+    <thead>
+        <tr>
+            <th>编号</th>
+            <th>名称</th>
+            <th>手机号</th>
+            <th>积分</th>
+            <th>金额</th>
+            <th>头像</th>
+            <th>级别</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody id="th"></tbody>
+</table>
+<div id="demo1"></div>
+<script>
+    
+    $().ready(function ()
+    {
+        layui.use(['laypage', 'layer'], function () {
+            var laypage = layui.laypage;
+
+            $.ajax({
+                url: "",
+                type: "get",
+                dataType: "json",
+                success: function (data)
+                {
+                    $("#th").empty();
+                    for (var i = 0; i < data.length; i++) {
+                        var result = "";
+                        if (data[i].C_State == 1)
+                        {
+                            result = "<td>普通顾客</td>";
+                        } else {
+                            result = "<td>会员</td>";
+                        }
+                        var str = "<tr><td>" + data[i].CId + "</td><td>" + data[i].C_Name + "</td><td>" + data[i].C_Cellphone + "</td><td>" + data[i].C_EndTime + "</td><td>" + data[i].integral + "</td><td><img src='" + data[i].Photo + "' width='150' height='150' class='layui-circle' /></td>" + result + "<td><button class='layui-btn layui - btn - danger' onclick='IN(" + data[i].CId + ")' ><i class='layui - icon' ></i></button></td></tr>"
+                    }
+                    //调用分页
+                    laypage.render({
+                        elem: 'demo0'
+                        , count: data.length
+                        , limit:5
+                        , jump: function (obj) {
+                            //模拟渲染
+                            document.getElementById('th').innerHTML = function () {
+                                var arr = []
+                                    , thisData = data.concat().splice(obj.curr * obj.limit - obj.limit, obj.limit);
+                                layui.each(thisData, function (index, item) {
+                                    arr.push(str);
+                                });
+                                return arr.join('');
+                            }();
+                        }
+                    });
+                }
+            })
+        })
+    })
+</script>
