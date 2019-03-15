@@ -1167,12 +1167,15 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\WangLuChao\Index.cshtml" />
     <Content Include="Views\LmqMVC\Index.cshtml" />
     <Content Include="Views\XJW\Login.cshtml" />
     <Content Include="Views\XJW\ShowCustom.cshtml" />
     <Content Include="Views\WangLuChao\AddDepartMent.cshtml" />
     <Content Include="Views\WangLuChao\AddEmployee.cshtml" />
+    <Content Include="Views\WangLuChao\ShowEmployee.cshtml" />
+    <Content Include="Views\WangLuChao\ShowDepartMent.cshtml" />
+    <Content Include="Views\WangLuChao\CeShi.cshtml" />
+    <Content Include="Views\WangLuChao\UpdEmployee.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

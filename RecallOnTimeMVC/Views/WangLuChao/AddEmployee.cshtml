@@ -6,17 +6,15 @@
 
 @using RecallOnTimeMVC.Models
 @model List<DepartMent>
-<script src="~/Scripts/jquery.validate.js"></script>
-<link href="~/layui-v2.4.5/layui/css/layui.css" rel="stylesheet" />
-<script src="~/js/jquery.min.js"></script>
-<script src="~/js/num-alignment.js"></script>
+
 
 <script src="~/layui/layui.js"></script>
 <script src="~/layui/layui.all.js"></script>
 <link href="~/layui/css/layui.css" rel="stylesheet" />
 <link href="~/layui/css/layui.mobile.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-3.3.1.js"></script>
 <div>
-    <form class="layui-form" action="/WangLuChao/AddEmployee" method="post" enctype="multipart/form-data" id='fm1' lay-filter="example">
+    <form class="layui-form" action="/WangLuChao/AddEmployees" method="post" enctype="multipart/form-data" id='fm1' lay-filter="example">
         <table>
             <tr>
                 <td><label class="layui-form-label">姓名</label></td>
@@ -24,11 +22,8 @@
             </tr>
             <tr>
                 <td><label class="layui-form-label">部门</label></td>
-                <td lay-search="">
-                    <select id="Select1" name="DID">
-                        <option>==请选择部门==</option>
-                    </select>
-                </td>
+                <td lay-search="">@Html.DropDownList("D_Name", ViewBag.GId as IEnumerable<SelectListItem>, "直接选择或搜索选择", new Dictionary<string, object> { { "lay-search", "" }, { "lay-verify", "required" } })</td>
+            </tr>
             <tr>
                 <td>
                     <label class="layui-form-label">账号</label>
@@ -45,12 +40,10 @@
                 </td>
             </tr>
             <tr>
-                <td>
-                    <label class="layui-form-label">头像</label>
-                </td>
-                <td>
-                    <input id="File1" type="file" name="file" />
-                </td>
+            <tr>
+                <td><label class="layui-form-label">图片</label></td>
+
+                <td><input id="File1" type="file" name="E_Img" />@*<img class="layui-upload-img" width="200" height="200" id="demo1" name="E_Img">*@</td>
             </tr>
             <tr>
                 <td>
@@ -72,15 +65,33 @@
             <tr>
                 <td></td>
                 <td>
-                    <input type="submit" class="layui-btn" lay-submit="/WangLuChao/AddEmployee" v-on:click='dataSubmit' value="立即提交" />
+                    <input type="submit" class="layui-btn" lay-submit="/WangLuChao/AddEmployees" v-on:click='dataSubmit' value="立即提交" id="gooods" />
                 </td>
             </tr>
         </table>
     </form>
 </div>
+<div class="layui-upload-drag" id="test10" style="float:right">
+    <i class="layui-icon"></i>
+    <p>点击上传，或将图片拖拽到此处</p>
+</div>
 <script src="~/layui-v2.4.5/layui/layui.all.js"></script>
 
 <script>
+    //$(function ()
+    //{
+    //    $.ajax({
+    //        url: "http://localhost:5646/api/WangLuChao/ShowDepartMent",
+    //        dataType: "json",
+    //        type: "get",
+    //        success: function (data) {
+    //            $(data).each(function ()
+    //            {
+    //                $("#Select1").append("<option value=" + this.DId + ">" + this.D_Name + "</option>");
+    //            })
+    //        }
+    //    })
+    //});
     window.onload = function () {
         //Lay脚本Start
         layui.use(['form', 'layedit', 'laydate'], function () {
@@ -88,6 +99,13 @@
                 , layer = layui.layer
                 , layedit = layui.layedit
                 , laydate = layui.laydate;
+            form.on('submit(demo1)', function (data)
+            {
+                //解决layui默认只能用from提交，不返回ajax的回调函数问题
+                return false;//重点
+            });
+
+
             //日期
             laydate.render({
                 elem: '#date'
@@ -149,6 +167,27 @@
         //Vue 脚本End
 
     };
+
+    layui.use('upload', function ()
+    {
+        var $ = layui.jquery
+            , upload = layui.upload;
+
+        //拖拽上传
+        upload.render({
+            elem: '#test10'
+            , url: "/WangLuChao/AddEmployees"
+            , accept: "employImg"//文件类型
+            , auto: false//不自动上传
+            , bindAction: '#gooods'//绑定按钮
+            , choose: function (obj) {
+                //预读本地文件示例，不支持ie8
+                obj.preview(function (index, file, result) {
+                    $('#demo1').attr('src', result); //图片链接（base64）
+                });
+            }
+        });
+    });
 </script>
 
 

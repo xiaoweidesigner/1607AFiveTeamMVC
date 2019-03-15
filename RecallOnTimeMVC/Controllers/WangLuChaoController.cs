@@ -13,9 +13,11 @@ namespace RecallOnTimeMVC.Controllers
     {
         // GET: WangLuChao
         //显示部门
-        public ActionResult Index()
+        public ActionResult ShowDepartMent()
         {
-            return View();
+            string result = HttpClientHelpers.Send("get", "/api/WangLuChao/ShowDepartMent", null);
+            List<DepartMent> jias = JsonConvert.DeserializeObject<List<DepartMent>>(result);
+            return View(jias);
         }
         [HttpGet]
         public ActionResult AddDepartMent()
@@ -25,7 +27,7 @@ namespace RecallOnTimeMVC.Controllers
         [HttpPost]
         public void AddDepartMent(DepartMent mm)
         {
-           
+            mm.Num = 0;
             string json = JsonConvert.SerializeObject(mm);
             string result = HttpClientHelpers.Send("post", "/api/WangLuChao/AddDepartMent", json);
             if (Convert.ToInt32(result) > 0)
@@ -39,31 +41,34 @@ namespace RecallOnTimeMVC.Controllers
         }
         public ActionResult ShowEmployee()
         {
-            return View();
-        }
-        public void ShopXia()
-        {
-            string sn = HttpClientHelpers.Send("get", "/api/WangLuChao/ShowDepartMent", null);
-
-            List<DepartMent> list = JsonConvert.DeserializeObject<List<DepartMent>>(sn);
-
-            ViewBag.DId = new SelectList(list, "DId", "D_Name");
+            string result = HttpClientHelpers.Send("get", "/api/WangLuChao/ShowEmployee", null);
+            List<Employee> jias = JsonConvert.DeserializeObject<List<Employee>>(result);
+            return View(jias);
         }
 
         [HttpGet]
         public ActionResult AddEmployee()
         {
-            ShopXia();
+            ShopName();
             return View();
         }
-        [HttpPost]
-        public ActionResult AddEmployee(Employee mm, HttpPostedFileBase file)
+        public void ShopName()
         {
+            string sn = HttpClientHelpers.Send("get", "api/WangLuChao/ShowDepartMent", null);
+
+            List<Employee> list = JsonConvert.DeserializeObject<List<Employee>>(sn);
+
+            ViewBag.Gid = new SelectList(list, "DId", "D_Name");
+        }
+        [HttpPost]
+        public string AddEmployees(Employee mm, HttpPostedFileBase file)
+        {
+            ShopName();
             string ee = Server.MapPath("/employImg/");
             string filename = DateTime.Now.ToString("yyyyMMddHHmmss") + file.FileName;
             file.SaveAs(ee + filename);
-            mm.E_Img = ee + filename;
 
+            mm.E_Img = ee + filename;
             mm.E_State = 1;//状态为
             string json = JsonConvert.SerializeObject(mm);
             string result = HttpClientHelpers.Send("post", "/api/WangLuChao/AddEmployee", json);
@@ -75,7 +80,39 @@ namespace RecallOnTimeMVC.Controllers
             {
                 Response.Write("<script>alert('bu ok')</script>");
             }
+            return "1";
+        }
+        public ActionResult CeShi()
+        {
             return View();
+        }
+
+        [HttpGet]
+        public ActionResult UpdEmployee(int Id)
+        {
+            ViewBag.EId = Id;
+            return View();
+        }
+        [HttpPost]
+        public string UpdEmployees(Employee mm, HttpPostedFileBase file)
+        {
+
+            string ee = Server.MapPath("/employImg/");
+            string filename = DateTime.Now.ToString("yyyyMMddHHmmss") + file.FileName;
+            file.SaveAs(ee + filename);
+
+            mm.E_Img = ee + filename;
+            string json = JsonConvert.SerializeObject(mm);
+            string result = HttpClientHelpers.Send("post", "/api/WangLuChao/UpdEmployee", json);
+            if (Convert.ToInt32(result) > 0)
+            {
+                Response.Write("<script>alert('ok')</script>");
+            }
+            else
+            {
+                Response.Write("<script>alert('bu ok')</script>");
+            }
+            return "1";
         }
     }
 }
