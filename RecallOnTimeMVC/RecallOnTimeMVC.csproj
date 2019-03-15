@@ -127,6 +127,7 @@
     <Compile Include="Common\HttpClientHelper.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LmqMVCController.cs" />
+    <Compile Include="Controllers\XJWController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -156,6 +157,18 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="cpts_639_ccb\index.html" />
+    <Content Include="cpts_639_ccb\public\css\base.css" />
+    <Content Include="cpts_639_ccb\public\css\login.css" />
+    <Content Include="cpts_639_ccb\public\images\admin_logo.png" />
+    <Content Include="cpts_639_ccb\public\images\login_bg.jpg" />
+    <Content Include="cpts_639_ccb\public\images\login_button.jpg" />
+    <Content Include="cpts_639_ccb\public\images\login_logo.jpg" />
+    <Content Include="cpts_639_ccb\public\images\login_name_bg.jpg" />
+    <Content Include="cpts_639_ccb\public\images\复件 login_logo.jpg" />
+    <Content Include="cpts_639_ccb\public\ui\config.js" />
+    <Content Include="cpts_639_ccb\public\ui\do.js" />
+    <Content Include="cpts_639_ccb\说明.txt" />
     <Content Include="EmployImg\QQ图片20190315085712.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -1009,6 +1022,8 @@
     <Content Include="MuBan\Widget\webuploader\0.1.5\images\Thumbs.db" />
     <Content Include="MuBan\Widget\webuploader\0.1.5\README.md" />
     <Content Include="MuBan\Widget\zTree\css\zTreeStyle\img\Thumbs.db" />
+    <Content Include="cpts_639_ccb\3000套网站模板免费拥有.url" />
+    <Content Include="cpts_639_ccb\找免费网站模板就上【模板之家】cssMoban.com.url" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -1035,6 +1050,8 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\LmqMVC\Index.cshtml" />
+    <Content Include="Views\XJW\Login.cshtml" />
+    <Content Include="Views\XJW\ShowCustom.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
