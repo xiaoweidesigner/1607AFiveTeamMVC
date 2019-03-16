@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using RecallOnTimeMVC.Models;
 using Newtonsoft.Json;
+using System.IO;
 
 namespace RecallOnTimeMVC.Controllers
 {
@@ -70,9 +71,26 @@ namespace RecallOnTimeMVC.Controllers
             return JsonConvert.SerializeObject(list);
         }
         //充值方法
-        public int CZ(float C_integral, int CId)
+        public void CZ(float C_integral, int CId)
         {
             string jsonResult = HttpClientHelper.SendRequest($"api/Xjw/CZ?C_integral={C_integral}&CId={CId}", "get");
+            int result = JsonConvert.DeserializeObject<int>(jsonResult);
+            if (result > 0)
+            {
+                Response.Write("<script>alert('充值成功');location.href='/XJW/ShowHYCustom';</script>");
+            }
+            else
+            {
+                Response.Write("<script>alert('充值失败');location.href='/XJW/ShowHYCustom';</script>");
+            }
+        }
+        //加入会员
+        public int JoinHY(int CId,string C_Name,HttpPostedFileBase file)
+        {
+            string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory+"/CustomImg/", file.FileName);
+            file.SaveAs(path);
+            string Img = Server.MapPath("/CustomImg/") + file.FileName;
+            string jsonResult = HttpClientHelper.SendRequest($"api/Xjw/JoinHY?CId="+CId+"&C_Name="+C_Name+"&Img="+Img,"get");
             int result = JsonConvert.DeserializeObject<int>(jsonResult);
             return result;
         }
