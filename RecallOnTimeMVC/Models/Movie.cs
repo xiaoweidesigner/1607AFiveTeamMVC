@@ -14,6 +14,7 @@ namespace RecallOnTimeMVC.Models
         public int MId { get; set; }//编号
         public string M_Name { get; set; }//电影名称
         public string M_Img { get; set; }//电影图片
+        public int M_Time { get; set; }//电影时长
         public string M_Plot { get; set; }//剧情介绍
         public string M_Mold { get; set; }//所属类型
         public string M_FilmProducer { get; set; }//制片人

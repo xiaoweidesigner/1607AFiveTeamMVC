@@ -1,0 +1,149 @@
+﻿@model RecallOnTimeMVC.Models.Movie
+@{
+    ViewBag.Title = "AddMovie";
+}
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+<link href="~/layui/css/layui.css" rel="stylesheet" />
+<script src="~/layui/layui.js"></script>
+
+ 
+    <form class="layui-form" action="/lmqMVC/AddMovie" method="post"  enctype="multipart/form-data">
+        <table>
+            <tr>
+                <td style="width:150px;">影片名称</td>
+                <td>
+                    <input type="text" name="M_Name" lay-verify="title" autocomplete="off" class="layui-input">
+                </td>
+            </tr>
+
+            <tr>
+                <td style="width:150px;">影片图片</td>
+                <td>
+                    <input id="File1" type="file" name="M_Img" />
+                </td>
+            </tr>
+            <tr>
+                <td style="width:150px;">影片时长</td>
+                <td>
+                    <input type="text" name="M_Time" lay-verify="title" autocomplete="off" class="layui-input">
+                </td>
+            </tr>
+            <tr>
+                <td style="width:150px;">影片单价</td>
+                <td>
+                    <input type="text" name="M_Price" lay-verify="title" autocomplete="off" class="layui-input">
+                </td>
+            </tr>
+            <tr>
+                <td style="width:150px;">制片人</td>
+                <td>
+                    <input type="text" name="M_FilmProducer" lay-verify="title" autocomplete="off" class="layui-input">
+                </td>
+            </tr>
+            <tr>
+                <td style="width:150px;">制片公司</td>
+                <td>
+                    <input type="text" name="M_Company" lay-verify="title" autocomplete="off" class="layui-input">
+                </td>
+            </tr>
+            <tr>
+                <td style="width:150px;">影片评分</td>
+                <td>
+                    <input type="text" name="M_Grade" lay-verify="title" autocomplete="off" class="layui-input">
+                </td>
+            </tr>
+            <tr>
+                <td style="width:150px;">影星</td>
+                <td>
+                    <input type="text" name="M_FileStar" lay-verify="title" autocomplete="off" class="layui-input">
+                </td>
+            </tr>
+            <tr>
+                <td style="width:150px;">影片年份</td>
+                <td>
+                    <input type="text" name="M_Year" id="date1" autocomplete="off" class="layui-input">
+                </td>
+            </tr>
+            <tr>
+                <td style="width:150px;">版本</td>
+                <td>
+                    <div class="layui-input-block">
+                        <input type="radio" name="M_Region" value="2D" title="2D" checked="">
+                        <input type="radio" name="M_Region" value="3D" title="3D">
+                        <input type="radio" name="M_Region" value="中文" title="中文">
+                        <input type="radio" name="M_Region" value="英文" title="英文">
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td style="width:150px;">上映时间</td>
+                <td>
+                    <input type="text" name="M_Show" id="date1" autocomplete="off" class="layui-input">
+                </td>
+            </tr>
+            <tr>
+                <td style="width:150px;">地区</td>
+                <td>
+                    <select name="M_Edition" lay-filter="aihao">
+                        <option value=""></option>
+                        <option value="华语">华语</option>
+                        <option value="美国">美国</option>
+                        <option value="欧洲">欧洲</option>
+                        <option value="韩国">韩国</option>
+                        <option value="日本">日本</option>
+                        <option value="泰国">泰国</option>
+                        <option value="印度">印度</option>
+                        <option value="其他">其他</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td style="width:150px;">所属类型</td>
+                <td>
+                    <input type="checkbox" name="M_Mold" title="喜剧" value="喜剧" checked="checked">
+                    <input type="checkbox" name="M_Mold" title="爱情" value="爱情">
+                    <input type="checkbox" name="M_Mold" title="动作" value="动作">
+                    <input type="checkbox" name="M_Mold" title="犯罪" value="犯罪">
+                    <input type="checkbox" name="M_Mold" title="惊悚" value="惊悚">
+                    <input type="checkbox" name="M_Mold" title="悬系" value="悬系">
+                    <input type="checkbox" name="M_Mold" title="动画" value="动画">
+                    <input type="checkbox" name="M_Mold" title="家庭伦理" value="家庭伦理">
+                    <input type="checkbox" name="M_Mold" title="其他" value="其他">
+                </td>
+            </tr>
+            <tr>
+                <td style="width:150px;">剧情介绍</td>
+                <td>
+                    <textarea placeholder="请输入内容" class="layui-textarea" name="M_Plot"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td style="width:150px;">上下架</td>
+                <td>
+                    <input type="radio" name="M_State" value="上架" title="上架" checked="">
+                    <input type="radio" name="M_State" value="下架" title="下架">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <button class="layui-btn" type="submit" lay-submit="" lay-filter="demo1">立即提交</button>
+                </td>
+            </tr>
+        </table>
+
+    </form>
+<script>
+
+    layui.use(['form', 'layedit', 'laydate'], function () {
+        var form = layui.form
+            , layer = layui.layer
+            , layedit = layui.layedit
+            , laydate = layui.laydate;
+
+        //日期
+        laydate.render({
+            elem: '#date1'
+        });
+    });
+    $("#M_Img").upload();
+</script>
