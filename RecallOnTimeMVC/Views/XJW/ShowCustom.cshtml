@@ -3,19 +3,21 @@
     ViewBag.Title = "ShowCustom";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<span>
-    <input type="button" value="添加顾客" />
-    顾客名称: <input type="text" id="C_Name" />
-    手机号: <input type="text" id="C_Cellphone" />
-    所属级别: <select id="C_State">
-        <option value="0">请选择</option>
-        <option value="1">普通顾客</option>
-        <option value="2">会员</option>
-    </select>
-    <input type="button" value="搜索" onclick="Find()" />
-</span>
+<fieldset class="layui-elem-field layui-field-title">
+    <legend>所有顾客列表显示</legend>
+    <span style="float:right">
+        顾客名称: <input type="text" id="C_Name" />
+        手机号: <input type="text" id="C_Cellphone" />
+        所属级别: <select id="C_State">
+            <option value="0">请选择</option>
+            <option value="1">普通顾客</option>
+            <option value="2">会员</option>
+        </select>
+        <input type="button" value="搜索" onclick="Find()" class="layui-btn layui-btn-warm" />
+    </span>
+</fieldset>
 
-<table class="layui-table" lay-skin="line" >
+<table class="layui-table" lay-skin="line">
     <thead>
         <tr>
             <th>编号</th>
@@ -32,16 +34,14 @@
 </table>
 <div id="demo1"></div>
 <script>
-    $().ready(function ()
-    {
+    $().ready(function () {
         layui.use(['laypage', 'layer'], function () {
             var laypage = layui.laypage;
             $.ajax({
                 url: "/XJW/MethodShow",
                 type: "get",
                 dataType: "json",
-                success: function (data)
-                {
+                success: function (data) {
                     $("#th").empty();
                     for (var i = 0; i < data.length; i++) {
                         //调用分页
@@ -56,12 +56,12 @@
                                         , thisData = data.concat().splice(obj.curr * obj.limit - obj.limit, obj.limit);
                                     layui.each(thisData, function (index, item) {
                                         var result = "";
-                                        if (item.C_State == 1) {
-                                            result = "<td>普通顾客<input type='button' value='加入会员' class='layui-btn layui-btn-normal layui-btn-sm' onclick='CZ(" + item.CId + ")' /> </td>";
+                                        if (item.C_State == 2) {
+                                            result = "<td>普通顾客<input type='button' value='加入会员' class='layui-btn layui-btn-normal layui-btn-sm' onclick='JoinHY(" + item.CId + ")' /> </td><td><button class='layui-btn layui-btn-disabled' onclick='CZ(" + item.CId + ")' ><i class='layui-icon'></i>充值</button></td>";
                                         } else {
-                                            result = "<td>会员</td>";
+                                            result = "<td style='color:red;' >会员</td><td><button class='layui-btn layui-btn-normal layui-btn-sm' onclick='CZ(" + item.CId + ")' ><i class='layui-icon'></i>充值</button></td>";
                                         }
-                                        arr.push("<tr><td>" + item.CId + "</td><td>" + item.C_Name + "</td><td>" + item.C_Cellphone + "</td><td>" + item.C_EndTime + "</td><td>" + item.integral + "</td><td><img src='" + item.Photo + "' width='50' height='50' class='layui-circle' /></td>" + result + "<td><button class='layui-btn layui-btn-normal layui-btn-sm' onclick='CZ(" + item.CId + ")' ><i class='layui-icon'></i>充值</button></td></tr>");
+                                        arr.push("<tr><td>" + item.CId + "</td><td>" + item.C_Name + "</td><td>" + item.C_Cellphone + "</td><td>" + item.C_EndTime + "</td><td>" + item.integral + "</td><td><img src='" + item.Photo + "' width='50' height='50' class='layui-circle' /></td>" + result + "</tr>");
                                     });
                                     return arr.join('');
                                 }();
@@ -72,59 +72,38 @@
             })
         })
     })
-    //弹出层
-    function CZ(Id)
-    {
-        var str = "<table class='layui-table' lay-skin='line' style='line-height:50px;' ><tr><td><input type='radio' name='JinE' value='50' />50元</td><td><input type='radio' name='JinE' value='100' />100元</td><td style='width:20%' ><input type='radio' name='JinE' value='150' />150元</td></tr><tr><td><input type='radio' name='JinE' value='200' />200元</td><td><input type='radio' name='JinE' value='300' />300元</td><td><input type='radio' name='JinE' value='500' />500元</td></tr>";
-        str += "<tr><td>请输入充值金额:</td><td><input type='text' name='JinE' id='JinE' /></td><td><input type='button' class='layui-btn layui-btn-sm layui-btn-normal' value='充值' onclick='BeginCZ('" + Id + "')' /></td></tr></table>";
-         layer.open(
-             {
-                 type: 1,
-                 title: "请选择充值金额/手动输入",
-                 content: str,
-                 area: ["450px", "300px"],
-             });
+    //充值弹出层
+    function CZ(Id) {
+        var str = "<table class='layui-table' lay-skin='line' style='line-height:50px;' ><tr><td><input type='button'  value='50元' onclick='BeginCZ(50)' class='layui-btn layui-btn-normal layui-btn-sm' /></td><td><input type='button' value='100元' onclick='BeginCZ(100)' class='layui-btn layui-btn-normal layui-btn-sm' /></td><td style='width:20%' ><input type='button' value='150元' onclick='BeginCZ(150)' class='layui-btn layui-btn-normal layui-btn-sm' /></td></tr><tr><td><input type='button' name='JinE' value='200元' onclick='BeginCZ(200)' class='layui-btn layui-btn-normal layui-btn-sm' /></td><td><input type='button' value='300元' onclick='BeginCZ(300)' class='layui-btn layui-btn-normal layui-btn-sm' /></td><td><input type='button' value='500元' onclick='BeginCZ(500)' class='layui-btn layui-btn-normal layui-btn-sm' /></td></tr>";
+        str += "<tr><td>请输入充值金额:</td><td><input type='text' name='JinE' id='JinE' /></td><td><input type='button' class='layui-btn layui-btn-sm layui-btn-normal' value='充值' onclick='BeginCZ2()' /></td><td><input type='hidden' id='CId' value='" + Id + "'/></td></tr></table>";
+        layer.open(
+            {
+                type: 1,
+                title: "请选择充值金额/手动输入",
+                content: str,
+                area: ["500px", "300px"],
+            });
     }
-    //开始充值
-    function BeginCZ(Id) 
-    {
-        debugger;
-        var JinE1 = $("input[type='radio']:checked").val();
-        var JinE2 = $("#JinE").val();
-        var Result = 0;
-        if (JinE1 != "" && JinE2 != "") 
+    //开始充值  按钮充值
+    function BeginCZ(Num) {
+        if (window.confirm('确定充值' + Num + '元吗?'))
         {
-            alert('请不要同时使用两种充值方式');
+            var CId = $("#CId").val();
+            location.href = "CZ?C_integral=" + Num + "&CId=" + CId;
         }
-        else
+    }
+    //文本框充值
+    function BeginCZ2()
+    {
+        var Num = $("#JinE").val();
+        if (window.confirm('确定充值' + Num + '元吗？'))
         {
-            if (JinE1 != "" && JinE2 == "") {
-                Result = JinE1;
-            }
-            if (JinE1 == "" && JinE2 != "") {
-                Result = JinE2;
-            }
-            $.ajax({
-                url: "hXjw/CZ?C_integral=" + Result + "&CId=" + Id,
-                type: "get",
-                dataType: "json",
-                success: function (data)
-                {
-                    if (data > 0)
-                    {
-                        alert('充值成功');
-                        window.onload();
-                    }
-                    else {
-                        alert('充值失败');
-                    }
-                }
-            })
+            var CId = $("#CId").val();
+            location.href = "CZ?C_integral=" + Num + "&CId=" + CId;
         }
     }
     //查询
-    function Find()
-    {
+    function Find() {
         layui.use(['laypage', 'layer'], function () {
             var laypage = layui.laypage;
             var C_Name = $("#C_Name").val();
@@ -149,12 +128,12 @@
                                         , thisData = data.concat().splice(obj.curr * obj.limit - obj.limit, obj.limit);
                                     layui.each(thisData, function (index, item) {
                                         var result = "";
-                                        if (item.C_State == 1) {
-                                            result = "<td>普通顾客<input type='button' value='加入会员' class='layui-btn layui-btn-normal layui-btn-sm' onclick='CZ(" + item.CId + ")' /> </td>";
+                                        if (item.C_State == 2) {
+                                            result = "<td>普通顾客<input type='button' value='加入会员' class='layui-btn layui-btn-normal layui-btn-sm' onclick='JoinHY(" + item.CId + ")' /> </td><td><button class='layui-btn layui-btn-disabled' onclick='CZ(" + item.CId + ")' ><i class='layui-icon'></i>充值</button></td>";
                                         } else {
-                                            result = "<td>会员</td>";
+                                            result = "<td style='color:red;' >会员</td><td><button class='layui-btn layui-btn-normal layui-btn-sm' onclick='CZ(" + item.CId + ")' ><i class='layui-icon'></i>充值</button></td>";
                                         }
-                                        arr.push("<tr><td>" + item.CId + "</td><td>" + item.C_Name + "</td><td>" + item.C_Cellphone + "</td><td>" + item.C_EndTime + "</td><td>" + item.integral + "</td><td><img src='" + item.Photo + "' width='50' height='50' class='layui-circle' /></td>" + result + "<td><button class='layui-btn layui-btn-normal layui-btn-sm' onclick='CZ(" + item.CId + ")' ><i class='layui-icon'></i>充值</button></td></tr>");
+                                        arr.push("<tr><td>" + item.CId + "</td><td>" + item.C_Name + "</td><td>" + item.C_Cellphone + "</td><td>" + item.C_EndTime + "</td><td>" + item.integral + "</td><td><img src='" + item.Photo + "' width='50' height='50' class='layui-circle' /></td>" + result + "</tr>");
                                     });
                                     return arr.join('');
                                 }();
@@ -164,5 +143,17 @@
                 }
             })
         })
+    }
+    //加入会员弹出层
+    function JoinHY(Id)
+    {
+        var str = "<form action='/XJW/JoinHY' method='post' enctype='multipart/form-data' ><table class='layui-table' ><tr><tr><td>用户编号:</td><td><input type='text' name='CId' readonly='readonly'  value='" + Id + "' /></td></tr><td>名称: </td><td><input type='text' name='C_Name' /></td></tr><tr style='margin-top:60px;' ><td>头像: </td><td><input type='file' name='file' /></td></tr><tr><td></td><td><input type='submit' value='提交' class='layui-btn layui-btn-warm layui-btn-radius' /></td></tr></table></form>";
+        layer.open(
+            {
+                type: 1,
+                title: "您即将成为我们的会员",
+                content: str,
+                area: ["500px", "300px"],
+            });
     }
 </script>
