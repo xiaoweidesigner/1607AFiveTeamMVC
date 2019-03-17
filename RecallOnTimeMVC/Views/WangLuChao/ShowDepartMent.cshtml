@@ -1,37 +1,58 @@
-﻿@model IEnumerable<RecallOnTimeMVC.Models.DepartMent>
-
+﻿
 @{
     ViewBag.Title = "ShowDepartMent";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>ShowDepartMent</h2>
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+<script src="~/layui-v2.4.5/layui/layui.js"></script>
+<link href="~/layui-v2.4.5/layui/css/layui.mobile.css" rel="stylesheet" />
+<div>
+    <button class='layui-btn layui-btn-normal layui-btn-sm' onclick="location.href='/WangLuChao/AddDepartMent'"><i class='layui-icon'></i>添加部门</button>
+    <table class="layui-table" lay-skin="line">
+        <thead>
+            <tr>
+                <td>部门编号</td>
+                <td>部门名称</td>
+                <td>部门人数</td>
+            </tr>
+        </thead>
+        <tbody id="th"></tbody>
+    </table>
+    <div id="demo1"></div>
+</div>
+<script>
+    $().ready(function () {
+        layui.use(['laypage', 'layer'], function () {
+            var laypage = layui.laypage;
+            $.ajax({
+                url: "/WangLuChao/showdeparMent",
+                type: "get",
+                dataType: "json",
+                success: function (data) {
+                    $("#th").empty();
+                    for (var i = 0; i < data.length; i++) {
+                        //调用分页
+                        laypage.render({
+                            elem: 'demo1'
+                            , count: data.length
+                            , limit: 5
+                            , jump: function (obj) {
+                                //模拟渲染
+                                document.getElementById('th').innerHTML = function () {
+                                    var arr = []
+                               , thisData = data.concat().splice(obj.curr * obj.limit - obj.limit, obj.limit);
+                                    layui.each(thisData, function (index, item) {
+                                        arr.push('<tr><td>' + item.DId + '</td><td>' + item.D_Name + '</td><td>' + item.Num + '</td></tr >');
+                              });
+                                    return arr.join('');
+                                }();
+                            }
+                        });
+                    }
+                }
+            })
+        })
+    })
+</script>
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.D_Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Num)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.D_Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Num)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.DId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.DId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.DId })
-        </td>
-    </tr>
-}
-
-</table>
