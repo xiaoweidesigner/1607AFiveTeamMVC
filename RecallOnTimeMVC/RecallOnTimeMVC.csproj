@@ -1171,7 +1171,6 @@
     <Content Include="Views\LmqMVC\Index.cshtml" />
     <Content Include="Views\XJW\Login.cshtml" />
     <Content Include="Views\XJW\ShowCustom.cshtml" />
-    <Content Include="Views\XJW\CeShi.cshtml" />
     <Content Include="Views\XJW\ShowCommonCustom.cshtml" />
     <Content Include="Views\XJW\ShowHYCustom.cshtml" />
     <Content Include="Views\WangLuChao\AddDepartMent.cshtml" />
@@ -1185,6 +1184,8 @@
     <Content Include="Views\LmqMVC\ShowMovieById.cshtml" />
     <Content Include="Views\LmqMVC\AddMovieHall.cshtml" />
     <Content Include="Views\LmqMVC\ShowMovieHall.cshtml" />
+    <Content Include="Views\XJW\EditPerpon.cshtml" />
+    <Content Include="Views\XJW\ShowSHMovieHall.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

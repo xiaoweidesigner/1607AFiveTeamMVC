@@ -26,7 +26,9 @@ namespace RecallOnTimeMVC.Controllers
             {
                 Session["Name"] = e.E_Name;//保存姓名
                 Session["DepartmentId"] = e.DepartMentId;//保存所属部门
-                Response.Write("<script>alert('登录成功');location.href='/LmqMVC/Index';</script>");
+                Session["EId"] = e.EId;//用于修改密码   
+                Session["User"] = e;//用于显示个人资料
+                Response.Write("<script>alert('登录成功');location.href='/XJW/ShowCustom';</script>");
             }
             else
             {
@@ -85,14 +87,79 @@ namespace RecallOnTimeMVC.Controllers
             }
         }
         //加入会员
-        public int JoinHY(int CId,string C_Name,HttpPostedFileBase file)
+        public void JoinHY(int CId,string C_Name,HttpPostedFileBase file)
         {
             string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory+"/CustomImg/", file.FileName);
             file.SaveAs(path);
             string Img = Server.MapPath("/CustomImg/") + file.FileName;
-            string jsonResult = HttpClientHelper.SendRequest($"api/Xjw/JoinHY?CId="+CId+"&C_Name="+C_Name+"&Img="+Img,"get");
+            string jsonResult = HttpClientHelper.SendRequest($"api/Xjw/Join?CId={CId}&C_Name={C_Name}&Img={Img}","get");
             int result = JsonConvert.DeserializeObject<int>(jsonResult);
-            return result;
+            if (result > 0)
+            {
+                Response.Write("<script>alert('恭喜你，成为我们的尊贵会员，积分会让你享受更好的优惠');location.href='/XJW/ShowCustom';</script>");
+            }
+            else
+            {
+                Response.Write("<script>alert('对不起，没能成为会员');location.href='/XJW/ShowCustom';</script>");
+            }
+        }
+        #endregion
+        #region 个人信息展示页面
+        [HttpGet]
+        public ActionResult EditPerpon()
+        {
+            var employee = Session["User"];
+            Employee em = employee as Employee;
+            return View(em);
+        }
+        [HttpPost]
+        public ActionResult EditPerpon(Employee em)
+        {
+            return View();
+        }
+        #endregion
+        #region 员工登录功能
+        //视图
+        public ActionResult ShowSHMovieHall()
+        {
+            int EId=Convert.ToInt32(Session["EId"]);
+            ViewBag.EId = EId;
+            return View();
+        }
+        //获取需打扫放映厅的列表  方法
+        public string ShowMovieHall()
+        {
+            string jsonResult = HttpClientHelper.SendRequest($"api/Xjw/SH", "get");
+            List<MovieHall> list = JsonConvert.DeserializeObject<List<MovieHall>>(jsonResult);
+            return JsonConvert.SerializeObject(list);
+        }
+        //改变清洁工员工状态为工作中  放映厅为打扫中
+        public void ChangeEMStatus(int EId,int HId)
+        {
+            string jsonResult = HttpClientHelper.SendRequest($"api/Xjw/UpdEmployeeStatus?EId={EId}&HId={HId}", "get");
+            int Result = JsonConvert.DeserializeObject<int>(jsonResult);
+            if (Result > 0)
+            {
+                Response.Write("<script>alert('已成功接收工作,望亲加油');location.href='/XJW/ShowSHMovieHall'</script>");
+            }
+            else
+            {
+                Response.Write("<script>alert('接收工作失败,请稍等片刻');location.href='/XJW/ShowSHMovieHall'</script>");
+            }
+        }
+        //改变清洁工员工状态为空闲中  放映厅为空闲中
+        public void ChangeEMStatusAndMovieHallStatus(int EId, int HId)
+        {
+            string jsonResult = HttpClientHelper.SendRequest($"api/Xjw/UpdEmployeeStatus2?EId={EId}&HId={HId}", "get");
+            int Result = JsonConvert.DeserializeObject<int>(jsonResult);
+            if (Result > 0)
+            {
+                Response.Write("<script>alert('工作交接完成，亲，辛苦了！');location.href='/XJW/ShowSHMovieHall'</script>");
+            }
+            else
+            {
+                Response.Write("<script>alert('交接失败，请稍等重试！');location.href='/XJW/ShowSHMovieHall'</script>");
+            }
         }
         #endregion
     }
