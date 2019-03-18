@@ -8,7 +8,7 @@
 <script src="~/layui-v2.4.5/layui/layui.js"></script>
 <link href="~/layui-v2.4.5/layui/css/layui.mobile.css" rel="stylesheet" />
 <div>
-    <button class='layui-btn layui-btn-normal layui-btn-sm' onclick="location.href='/WangLuChao/AddDepartMent'"><i class='layui-icon'></i>添加部门</button>
+    <button class='layui-btn layui-btn-normal layui-btn-sm' onclick="Addbumen()"><i class='layui-icon'></i>添加部门</button>
     <table class="layui-table" lay-skin="line">
         <thead>
             <tr>
@@ -54,5 +54,18 @@
             })
         })
     })
+    //添加部门
+    function Addbumen()
+    {
+        var str = "<form action='/WangLuChao/AddDepartMent' method='post'><table class='layui-table' ><tr><tr><td>名称: </td><td><input type='text' name='D_Name' /></td></tr><tr><td></td><td><input type='submit' value='提交' class='layui-btn layui-btn-warm layui-btn-radius' /></td></tr></table></form>";
+        layer.open(
+            {
+                type: 1,
+                title: "添加部门",
+                content: str,
+                area: ["350px", "200px"],
+            });
+    }
+
 </script>
 

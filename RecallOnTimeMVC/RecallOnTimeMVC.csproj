@@ -1173,7 +1173,6 @@
     <Content Include="Views\XJW\ShowCustom.cshtml" />
     <Content Include="Views\XJW\ShowCommonCustom.cshtml" />
     <Content Include="Views\XJW\ShowHYCustom.cshtml" />
-    <Content Include="Views\WangLuChao\AddDepartMent.cshtml" />
     <Content Include="Views\WangLuChao\AddEmployee.cshtml" />
     <Content Include="Views\WangLuChao\ShowEmployee.cshtml" />
     <Content Include="Views\WangLuChao\ShowDepartMent.cshtml" />

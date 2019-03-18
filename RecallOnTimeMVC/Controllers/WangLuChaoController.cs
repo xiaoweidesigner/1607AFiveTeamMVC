@@ -37,12 +37,7 @@ namespace RecallOnTimeMVC.Controllers
             List<DepartMent> jias = JsonConvert.DeserializeObject<List<DepartMent>>(result);
             return JsonConvert.SerializeObject(jias);
         }
-        [HttpGet]//添加部门
-        public ActionResult AddDepartMent()
-        {
-            return View();
-        }
-        [HttpPost]
+
         public void AddDepartMent(DepartMent mm)
         {
             mm.Num = 0;
@@ -50,7 +45,7 @@ namespace RecallOnTimeMVC.Controllers
             string result = HttpClientHelpers.Send("post", "/api/WangLuChao/AddDepartMent", json);
             if (Convert.ToInt32(result) > 0)
             {
-                Response.Write("<script>alert('ok')</script>");
+                Response.Write("<script><script>alert('ok');location.href='/WangLuChao/ShowDepartMent'</script>");
             }
             else
             {
@@ -180,6 +175,12 @@ namespace RecallOnTimeMVC.Controllers
             string fin = HttpClientHelpers.Send("get", "/api/WangLuChao/ShowFinances", null);
             List<Finance> ss = JsonConvert.DeserializeObject<List<Finance>>(fin);
             return JsonConvert.SerializeObject(ss);
+        }
+        public int updee(int EId)
+        {
+            string jsonResult = HttpClientHelper.SendRequest($"api/WangLuChao/ShowEmployeeId/{EId}", "get");
+            int result = JsonConvert.DeserializeObject<int>(jsonResult);
+            return result;
         }
     }
 }
