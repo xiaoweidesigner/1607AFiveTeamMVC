@@ -1,0 +1,78 @@
+﻿
+@{
+    ViewBag.Title = "ShowSHMovieHall";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<table class="layui-table" lay-skin="line" >
+    <thead>
+        <tr>
+            <th>影厅编号</th>
+            <th>影厅名称</th>
+            <th>影厅名称</th>
+            <th>影厅图片</th>
+            <th>影厅状态</th>
+            <th>去打扫</th>
+            <th>打扫完毕</th>
+        </tr>
+    </thead>
+    <tbody id="th" >
+
+    </tbody>
+</table>
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+<script>
+    $().ready(function () {
+        layui.use(['laypage'], function () {
+            var laypage = layui.laypage;
+            $.ajax({
+                url: "/XJW/ShowMovieHall",
+                type: "get",
+                dataType: "json",
+                success: function (data) {
+                    $("#th").empty();
+                    for (var i = 0; i < data.length; i++) {
+                        //调用分页
+                        laypage.render({
+                            elem: 'demo1'
+                            , count: data.length
+                            , limit: 5
+                            , jump: function (obj) {
+                                //模拟渲染
+                                document.getElementById('th').innerHTML = function () {
+                                    var arr = []
+                                        , thisData = data.concat().splice(obj.curr * obj.limit - obj.limit, obj.limit);
+                                    layui.each(thisData, function (index, item) {
+                                        var Result = "";
+                                        if (item.H_State == 3) {
+                                            Result = "<td style='red'>需打扫</td><td><input type='button' value='去打扫' class='layui-btn layui-btn-radius' onclick='ChangeEMStatus('" + item.HId + "')' /></td><td><input type='button' value='打扫完毕' class='layui-btn layui-btn-disabled layui-btn-radius' /></td>";
+                                        }
+                                        else if (item.H_State == 4) {
+                                            Result = "<td style='red'>打扫中</td><td><input type='button' value='去打扫' class='layui-btn layui-btn-disabled layui-btn-radius' /></td><td><input type='button' value='打扫完毕' class='layui-btn layui-btn-radius' onclick='ChangeEMStatusAndMovieHallStatus('" + item.HId + "')' /></td>";
+                                        }
+                                        arr.push("<tr><td>" + item.HId + "</td><td>" + item.H_Name + "</td><td><img src='" + item.H_Photo + "' width='50' height='50' class='layui-circle' /></td>" + Result + "</tr>");
+                                    });
+                                    return arr.join('');
+                                }();
+                            }
+                        });
+                    }
+                }
+            })
+        })
+    });
+    //改变员工状态为空闲中 放映厅状态为空闲   Id为影厅Id
+    function ChangeEMStatusAndMovieHallStatus(Id)
+    {
+        debugger;
+        var EId =@ViewBag.EId;//获取员工Id
+        location.href = '/XJW/ChangeEMStatusAndMovieHallStatus?HId=' + Id + "&EId=" + EId;
+    }
+    //改变员工状态为工作中 放映厅为打扫中
+    function ChangeEMStatus(Id)
+    {
+        debugger;
+        var EId =@ViewBag.EId;//获取员工Id
+        location.href = '/XJW/ChangeEMStatus?EId=' + EId + "&HId=" + Id;
+    }
+</script>

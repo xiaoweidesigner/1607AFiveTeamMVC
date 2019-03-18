@@ -24,5 +24,7 @@ namespace RecallOnTimeMVC.Models
         public int E_State { get; set; }//状态 1工作中 2空闲中
 
         public DepartMent DepartMent { get; set; }
+        public int DId { get; set; }//编号
+        public string D_Name { get; set; }//部门名称
     }
 }

@@ -1,0 +1,42 @@
+﻿
+@{
+    ViewBag.Title = "CeShi";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+<tr>
+    <td><label class="layui-form-label">部门</label></td>
+    <td>
+        <select id="Select1">
+            <option>==请选择部门==</option>
+        </select>
+    </td>
+</tr>
+<script>
+    $(function () {
+        $.ajax({
+            url: "http://localhost:5646/api/WangLuChao/ShowDepartMent",
+            dataType: "json",
+            type: "get",
+            success: function (data)
+            {
+                $(data).each(function ()
+                {
+                    $("#Select1").append("<option value=" + data.DId + ">" + data.D_Name + "</option>");
+
+                })
+            }
+        })
+    });
+    //$.ajax({
+    //    type: "gei",
+    //    url: "http://localhost:5646/api/WangLuChao/ShowDepartMent", //此次url改为真正需要的url
+    //    success: function (data, status)
+    //    {
+    //        $.each(data, function (index, item) {
+    //            $("#select").append(  //此处向select中循环绑定数据
+    //                "<option value=" + item.DId + ">" + item.D_Name + "</option>");
+    //        });
+    //    },
+    //});
+</script>

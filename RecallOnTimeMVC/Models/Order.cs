@@ -19,7 +19,10 @@ namespace RecallOnTimeMVC.Models
         [ForeignKey("Custom")]
         public int CustomId { get; set; }//顾客表外键
         public int O_State { get; set; }//状态
+        //[ForeignKey("Seat")]
+        //public int SeatId { get; set; }//座位表外键
 
+        //public Seat Seat { get; set; }
         public SessionS SessionS { get; set; }
         public Custom Custom { get; set; }
     }

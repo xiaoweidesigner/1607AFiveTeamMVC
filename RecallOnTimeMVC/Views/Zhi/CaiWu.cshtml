@@ -1,0 +1,140 @@
+﻿
+@{
+    Layout = null;
+}
+
+@model  List<RecallOnTimeMVC.Models.Finance>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="~/MuBan/assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/html5-canvas-chart-js/html5-canvas-chart-js/css/default.css" rel="stylesheet" />
+    <link href="~/html5-canvas-chart-js/html5-canvas-chart-js/css/normalize.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/MuBan/css/style.css" />
+    <link rel="stylesheet" href="~/MuBan/assets/css/font-awesome.min.css" />
+    <link href="~/MuBan/assets/css/codemirror.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/MuBan/font/css/font-awesome.min.css" />
+    <script src="~/html5-canvas-chart-js/YMDClass.js"></script>
+    <!--[if lte IE 8]>
+      <link rel="stylesheet" href="assets/css/ace-ie.min.css" />
+    <![endif]-->
+    <!--[if IE 7]>
+      <link rel="stylesheet" href="assets/css/font-awesome-ie7.min.css" />
+    <![endif]-->
+    <!--[if lte IE 8]>
+      <link rel="stylesheet" href="assets/css/ace-ie.min.css" />
+    <![endif]-->
+    <script src="~/MuBan/assets/js/ace-extra.min.js"></script>
+    <!--[if lt IE 9]>
+    <script src="assets/js/html5shiv.js"></script>
+    <script src="assets/js/respond.min.js"></script>
+    <![endif]-->
+    <!--[if !IE]> -->
+    <script src="~/MuBan/js/jquery-1.9.1.min.js" type="text/javascript"></script>
+    <!-- <![endif]-->
+    <script src="~/MuBan/assets/dist/echarts.js"></script>
+    <script src="~/MuBan/assets/js/bootstrap.min.js"></script>
+    <title>交易</title>
+</head>
+
+<body>
+    <div class=" page-content clearfix">
+        <select name="year1" id="nian"></select>
+        <select name="month1" id="yue"></select>
+        <select name="day1" id="ri"></select>
+        <input id="Button1" type="button" value="查询" onclick="dianji()"/>
+        <div class="transaction_style">
+            <ul class="state-overview clearfix">
+                <li class="Info">
+                    <span class="symbol red"><i class="fa fa-jpy"></i></span>
+                    <span class="value"><h4>交易金额</h4><p class="Quantity color_red">@ViewBag.jiaoyijine</p></span>
+                </li>
+                <li class="Info">
+                    <span class="symbol terques"><i class="fa fa-jpy"></i></span>
+                    <span class="value"><h4>交易成功</h4><p class="Quantity color_red">@ViewBag.jiaoyichenggong</p></span>
+                </li>
+                <li class="Info">
+                    <span class="symbol darkblue"><i class="fa fa-jpy"></i></span>
+                    <span class="value"><h4>退款金额</h4><p class="Quantity color_red">@ViewBag.tuikuanjine</p></span>
+                </li>
+                <li class="Info">
+                    <span class="symbol  blue"><i class="fa fa-shopping-cart"></i></span>
+                    <span class="value"><h4>订单数量</h4><p class="Quantity color_red">@ViewBag.dingdanshuliang</p></span>
+                </li>
+            </ul>
+
+        </div>
+
+
+
+
+        <script>
+            //new YMDselect('year1','month1');
+            //new YMDselect('year1','month1',1990);
+            //new YMDselect('year1','month1',1990,2);
+            //new YMDselect('year1','month1','day1');
+            new YMDselect('year1', 'month1', 'day1');
+            //new YMDselect('year1','month1','day1',1990,2);
+            //new YMDselect('year1','month1','day1',1990,2,10);
+        </script>
+        <div class="htmleaf-container">
+
+            <div class="htmleaf-content">
+                <div style="width:30%;margin:0 auto;">
+                    <div>
+                        <canvas id="canvas" height="450" width="600"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="~/html5-canvas-chart-js/html5-canvas-chart-js/js/Chart.js"></script>
+        <script>
+            da();
+            function da() {
+                var randomScalingFactor = function () { return Math.round(Math.random() * 100) };
+            var lineChartData = {
+                labels:[@Html.Raw(@ViewBag.shijian)],
+                datasets: [
+                    {
+                label: "My First dataset",
+                        fillColor: "rgba(220,220,220,0.2)",
+                        strokeColor: "rgba(220,220,220,1)",
+                        pointColor: "rgba(220,220,220,1)",
+                        pointStrokeColor: "#fff",
+                        pointHighlightFill: "#fff",
+                        pointHighlightStroke: "rgba(220,220,220,1)",
+                        data:[@ViewBag.qian2]
+                    }
+                ]
+
+            }
+
+            window.onload = function () {
+                var ctx = document.getElementById("canvas").getContext("2d");
+                window.myLine = new Chart(ctx).Line(lineChartData, {
+                    responsive: true
+                });
+            }
+            }
+            function dianji() {
+                var nian = $("#nian").val();
+                var yue = $("#yue").val();
+                var ri = $("#ri").val();
+                $.ajax({
+                    url: "/Zhi/CaiWu/?nian=" + nian + "&yue=" + yue + "&ri=" + ri,
+                    type: "get",
+                    success: function (data) {
+                        da();
+                    }
+                })
+            }
+
+
+        </script>
+        <div style="text-align:center;clear:both">
+            <script src="/gg_bd_ad_720x90-2.js" type="text/javascript"></script>
+        </div>
+    </div></body>
+</html>
