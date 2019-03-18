@@ -69,7 +69,7 @@ namespace RecallOnTimeMVC.Controllers
             file.SaveAs(ee + filename);
 
             mm.E_Img = ee + filename;
-            mm.E_State = 1;//状态为
+            mm.E_State = 1;//状态为空闲中
             string json = JsonConvert.SerializeObject(mm);
             string result = HttpClientHelpers.Send("post", "/api/WangLuChao/AddEmployee", json);
             if (Convert.ToInt32(result) > 0)
