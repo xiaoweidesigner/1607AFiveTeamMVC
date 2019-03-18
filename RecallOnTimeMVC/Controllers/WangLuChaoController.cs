@@ -117,19 +117,19 @@ namespace RecallOnTimeMVC.Controllers
             return View();
         }
         [HttpPost]
-        public string UpdEmployees(Employee mm, HttpPostedFileBase file)
+        public string UpdEmployees(Employee mm, HttpPostedFileBase E_Img)
         {
 
             string ee = Server.MapPath("/employImg/");
-            string filename = DateTime.Now.ToString("yyyyMMddHHmmss") + file.FileName;
-            file.SaveAs(ee + filename);
-
-            mm.E_Img = ee + filename;
+            string filename = DateTime.Now.ToString("yyyyMMddHHmmss") + E_Img.FileName;
+            E_Img.SaveAs(ee + filename);
+            mm.E_Img = "/employImg/" + filename;
+            mm.E_State = 1;//状态为
             string json = JsonConvert.SerializeObject(mm);
             string result = HttpClientHelpers.Send("post", "/api/WangLuChao/UpdEmployee", json);
             if (Convert.ToInt32(result) > 0)
             {
-                Response.Write("<script>alert('ok')</script>");
+                Response.Write("<script>alert('ok');location.href='/XJW/EditPerpon'</script>");
             }
             else
             {
@@ -175,12 +175,6 @@ namespace RecallOnTimeMVC.Controllers
             string fin = HttpClientHelpers.Send("get", "/api/WangLuChao/ShowFinances", null);
             List<Finance> ss = JsonConvert.DeserializeObject<List<Finance>>(fin);
             return JsonConvert.SerializeObject(ss);
-        }
-        public int updee(int EId)
-        {
-            string jsonResult = HttpClientHelper.SendRequest($"api/WangLuChao/ShowEmployeeId/{EId}", "get");
-            int result = JsonConvert.DeserializeObject<int>(jsonResult);
-            return result;
         }
     }
 }

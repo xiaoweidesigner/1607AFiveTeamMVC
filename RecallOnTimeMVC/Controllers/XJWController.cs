@@ -129,11 +129,6 @@ namespace RecallOnTimeMVC.Controllers
             Employee em = employee as Employee;
             return View(em);
         }
-        [HttpPost]
-        public ActionResult EditPerpon(Employee em)
-        {
-            return View();
-        }
         #endregion
         #region 员工登录功能
         //视图
