@@ -1,9 +1,8 @@
 ﻿
 @{
-    ViewBag.Title = "ShowEmployee";
+    ViewBag.Title = "ShowFinace";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 
 <script src="~/Scripts/jquery-3.3.1.js"></script>
 <script src="~/layui-v2.4.5/layui/layui.js"></script>
@@ -11,14 +10,9 @@
 <table class="layui-table" lay-skin="line">
     <thead>
         <tr>
-            <td>头像</td>
-            <td>姓名</td>
-            <td>账号</td>
-            <td>部门</td>
-            <td>性别</td>
-            <td>手机</td>
-            <td>状态</td>
-            <td>操作</td>
+            <td>编号</td>
+            <td>金额</td>
+            <td>创建时间</td>
         </tr>
     </thead>
     <tbody id="th"></tbody>
@@ -29,7 +23,7 @@
         layui.use(['laypage', 'layer'], function () {
             var laypage = layui.laypage;
             $.ajax({
-                url: "/WangLuChao/Show",
+                url: "/WangLuChao/finace",
                 type: "get",
                 dataType: "json",
                 success: function (data) {
@@ -44,10 +38,10 @@
                                 //模拟渲染
                                 document.getElementById('th').innerHTML = function () {
                                     var arr = []
-                               , thisData = data.concat().splice(obj.curr * obj.limit - obj.limit, obj.limit);
-                                        layui.each(thisData, function (index, item) {
-                                            arr.push('<tr><td><img height="40" width="50" src=' + item.E_Img + ' alt=' + item.E_Name + ' /></td><td>' + item.E_Name + '</td><td>' + (item.DepartMentId == 1 ? "清洁部" : "总司令") + '</td><td>' + item.E_Account + '</td><td>' + (item.E_Sex == 0 ? "男" : "女") + '</td><td>' + item.E_Phone + '</td><td>' + (item.E_State == 1 ? "空闲" : "打扫中") + "<td><button class='layui-btn layui-btn-normal layui-btn-sm' onclick='ji(" + item.EId + ")' ><i class='layui-icon'></i>修改</button></td></tr >");
-                              });
+                                        , thisData = data.concat().splice(obj.curr * obj.limit - obj.limit, obj.limit);
+                                    layui.each(thisData, function (index, item) {
+                                        arr.push('<tr><td>' + item.FId + '</td><td>' + item.Money + '</td><td>' + item.CreateTime + '</td></tr >');
+                                    });
                                     return arr.join('');
                                 }();
                             }
@@ -57,13 +51,6 @@
             })
         })
     })
-
-    function ji(Id)
-    {
-        alert(Id);
-        location.href = '/WangLuChao/UpdEmployee?EId=' + Id ;
-    }
 </script>
 
- 
 

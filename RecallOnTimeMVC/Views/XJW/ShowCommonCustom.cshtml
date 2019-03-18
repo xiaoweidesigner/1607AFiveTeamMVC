@@ -134,7 +134,8 @@
         })
     }
     //加入会员弹出层
-    function JoinHY(Id) {
+    function JoinHY(Id)
+    {
         var str = "<form action='/XJW/JoinHY' method='post' enctype='multipart/form-data' ><table class='layui-table' ><tr><tr><td>用户编号:</td><td><input type='text' name='CId' readonly='readonly'  value='" + Id + "' /></td></tr><td>名称: </td><td><input type='text' name='C_Name' /></td></tr><tr style='margin-top:60px;' ><td>头像: </td><td><input type='file' name='file' /></td></tr><tr><td></td><td><input type='submit' value='提交' class='layui-btn layui-btn-warm layui-btn-radius' /></td></tr></table></form>";
         layer.open(
             {
