@@ -1,0 +1,55 @@
+﻿@model RecallOnTimeMVC.Models.SessionS
+
+@{
+    ViewBag.Title = "AddSessionS";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+
+<table class="table table-striped ">
+    <tr>
+        <td>电影名称</td>
+        <td>@Html.DropDownListFor(model => model.MovieId, ViewBag.movie as SelectList, "请选择")</td>
+    </tr>
+    <tr>
+        <td>影厅名称</td>
+        <td>@Html.DropDownListFor(model => model.MovieHallId, ViewBag.moviehall as SelectList, "请选择")</td>
+    </tr>
+    <tr>
+        <td>开始时间</td>
+        <td><input type="text" class="layui-inline" name="S_BeginTime" id="date1" placeholder="yyyy-MM-dd HH:mm:ss"></td>        
+    </tr>
+    <tr>
+        <td>结束时间</td>
+        <td><input type="text" class="layui-inline" name="S_EndTime" id="date2" placeholder="yyyy-MM-dd HH:mm:ss"></td>       
+    </tr>
+    <tr>
+        <td colspan="2"><input type="submit" value="添加" class="btn btn-default" /></td>
+    </tr>
+</table>
+
+}
+<div>
+    @Html.ActionLink("返回列表", "ShowSessionS")
+</div>
+<script>
+
+    layui.use(['form', 'laydate'], function () {
+        var form = layui.form
+            , layer = layui.layer
+            , laydate = layui.laydate;
+
+        //开始时间
+        laydate.render({
+            elem: '#date1'
+            , type: 'datetime'
+        });
+        //结束时间
+        laydate.render({
+            elem: '#date2'
+            , type: 'datetime'
+        });
+    });
+</script>

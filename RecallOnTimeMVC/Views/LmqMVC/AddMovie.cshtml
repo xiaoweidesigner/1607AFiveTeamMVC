@@ -1,13 +1,9 @@
 ﻿@model RecallOnTimeMVC.Models.Movie
 @{
     ViewBag.Title = "AddMovie";
+    
 }
-<script src="~/Scripts/jquery-3.3.1.js"></script>
-<link href="~/layui/css/layui.css" rel="stylesheet" />
-<script src="~/layui/layui.js"></script>
-
- 
-    <form class="layui-form" action="/lmqMVC/AddMovie" method="post"  enctype="multipart/form-data">
+    <form class="layui-form" action="/LmqMVC/AddMovie" enctype="multipart/form-data" method="post">
         <table>
             <tr>
                 <td style="width:150px;">影片名称</td>
@@ -19,19 +15,19 @@
             <tr>
                 <td style="width:150px;">影片图片</td>
                 <td>
-                    <input id="File1" type="file" name="M_Img" />
-                </td>
-            </tr>
-            <tr>
-                <td style="width:150px;">影片时长</td>
-                <td>
-                    <input type="text" name="M_Time" lay-verify="title" autocomplete="off" class="layui-input">
+                    <input id="File1" type="file" name="file" value="选择图片" />
                 </td>
             </tr>
             <tr>
                 <td style="width:150px;">影片单价</td>
                 <td>
                     <input type="text" name="M_Price" lay-verify="title" autocomplete="off" class="layui-input">
+                </td>
+            </tr>
+            <tr>
+                <td style="width:150px;">影片时长</td>
+                <td>
+                    <input type="text" name="M_Time" lay-verify="title" autocomplete="off" class="layui-input">
                 </td>
             </tr>
             <tr>
@@ -118,19 +114,11 @@
                 </td>
             </tr>
             <tr>
-                <td style="width:150px;">上下架</td>
-                <td>
-                    <input type="radio" name="M_State" value="上架" title="上架" checked="">
-                    <input type="radio" name="M_State" value="下架" title="下架">
-                </td>
-            </tr>
-            <tr>
                 <td colspan="2">
                     <button class="layui-btn" type="submit" lay-submit="" lay-filter="demo1">立即提交</button>
                 </td>
             </tr>
         </table>
-
     </form>
 <script>
 
@@ -145,5 +133,4 @@
             elem: '#date1'
         });
     });
-    $("#M_Img").upload();
 </script>

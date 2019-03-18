@@ -1,0 +1,55 @@
+﻿
+@{
+    ViewBag.Title = "ShowSessionS";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<input id="Button1" type="button" value="添加场次" class="btn btn-info" onclick="location.href = '/LmqMVC/AddSessionS';" />
+<table class="layui-table" lay-skin="line">
+    <thead>
+        <tr>
+            <th>场次编号</th>
+            <th>电影名称</th>
+            <th>放映厅名称</th>
+            <th>开始时间</th>
+        </tr>
+    </thead>
+    <tbody id="th"></tbody>
+</table>
+
+<div id="demo1"></div>
+
+<script>
+    $().ready(function () {
+        layui.use(['laypage', 'layer'], function () {
+            var laypage = layui.laypage;
+            $.ajax({
+                url: "/LmqMVC/ShowSessionSMethod",
+                type: "get",
+                dataType: "json",
+                success: function (data) {
+                    $("#th").empty();
+                    //总页数大于页码总数
+                    for (var i = 0; i < data.length; i++) {
+                        laypage.render({
+                            elem: 'demo1'
+                            , count: data.length//数据总数
+                            , limit: 3
+                            , jump: function (obj) {
+                                //模拟渲染
+                                document.getElementById('th').innerHTML = function () {
+                                    var arr = []
+                                        , thisData = data.concat().splice(obj.curr * obj.limit - obj.limit, obj.limit);
+                                    layui.each(thisData, function (index, item) {
+                                        arr.push("<tr><td>" + item.SId + "</td><td>" + item.M_Name + "</td><td>" + item.H_Name + "</td><td>" + item.S_BeginTime + "</td></tr >");
+                                    });
+                                    return arr.join('');
+                                }();
+                            }
+                        });
+                    }
+                }
+            })
+        });
+    });
+</script>
+

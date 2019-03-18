@@ -4,7 +4,9 @@
     <meta charset="utf-8" />
     <title>追忆后台管理系统  </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+    <link href="~/layui/css/layui.css" rel="stylesheet" />
+    <script src="~/layui/layui.js"></script>
     <link href="~/MuBan/assets/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/MuBan/assets/css/font-awesome.min.css" />
     <link rel="stylesheet" href="~/MuBan/assets/css/ace.min.css" />
@@ -364,9 +366,9 @@
                             <li>
                                 <a href="#" class="dropdown-toggle"><i class="icon-desktop"></i><span class="menu-text"> 影片管理 </span><b class="arrow icon-angle-down"></b></a>
                                 <ul class="submenu">
-                                    <li class="home"><a href="javascript:void(0)" name="Products_List.html" title="添加影片" class="iframeurl"><i class="icon-double-angle-right"></i>添加影片</a></li>
-                                    <li class="home"><a href="javascript:void(0)" name="Brand_Manage.html" title="影片列表" class="iframeurl"><i class="icon-double-angle-right"></i>影片列表</a></li>
-                                    <li class="home"><a href="javascript:void(0)" name="Category_Manage.html" title="影厅列表" class="iframeurl"><i class="icon-double-angle-right"></i>影厅列表</a></li>
+                                    <li class="home"><a href="/LmqMVC/AddMovie" name="Products_List.html" title="添加影片" class="iframeurl"><i class="icon-double-angle-right"></i>添加影片</a></li>
+                                    <li class="home"><a href="/LmqMVC/ShowMovie" name="Brand_Manage.html" title="影片列表" class="iframeurl"><i class="icon-double-angle-right"></i>影片列表</a></li>
+                                    <li class="home"><a href="/LmqMVC/ShowMovieHall" name="Category_Manage.html" title="影厅列表" class="iframeurl"><i class="icon-double-angle-right"></i>影厅列表</a></li>
 
                                 </ul>
                             </li>
@@ -380,9 +382,9 @@
                             <li>
                                 <a href="#" class="dropdown-toggle"><i class="icon-list"></i><span class="menu-text"> 员工管理 </span><b class="arrow icon-angle-down"></b></a>
                                 <ul class="submenu">
-                                    <li class="home"><a href="javascript:void(0)" name="transaction.html" title="添加员工" class="iframeurl"><i class="icon-double-angle-right"></i>添加员工</a></li>
-                                    <li class="home"><a href="javascript:void(0)" name="Order_Chart.html" title="员工列表" class="iframeurl"><i class="icon-double-angle-right"></i>员工列表</a></li>
-                                    <li class="home"><a href="javascript:void(0)" name="Orderform.html" title="部门列表" class="iframeurl"><i class="icon-double-angle-right"></i>部门列表</a></li>
+                                    <li class="home"><a href="/WangLuChao/AddEmployee" name="transaction.html" title="添加员工" class="iframeurl"><i class="icon-double-angle-right"></i>添加员工</a></li>
+                                    <li class="home"><a href="/WangLuChao/ShowEmployee" name="Order_Chart.html" title="员工列表" class="iframeurl"><i class="icon-double-angle-right"></i>员工列表</a></li>
+                                    <li class="home"><a href="/Wang/LuChao/ShowDepartMent" name="Orderform.html" title="部门列表" class="iframeurl"><i class="icon-double-angle-right"></i>部门列表</a></li>
                                 </ul>
                             </li>
                             <li>
@@ -396,7 +398,7 @@
                             <li>
                                 <a href="#" class="dropdown-toggle"><i class="icon-user"></i><span class="menu-text"> 活动管理 </span><b class="arrow icon-angle-down"></b></a>
                                 <ul class="submenu">
-                                    <li class="home"><a href="javascript:void(0)" name="user_list.html" title="添加活动" class="iframeurl"><i class="icon-double-angle-right"></i>添加活动</a></li>
+                                    <li class="home"><a href="#" name="user_list.html" title="添加活动" class="iframeurl"><i class="icon-double-angle-right"></i>添加活动</a></li>
                                     <li class="home"><a href="javascript:void(0)" name="member-Grading.html" title="活动列表" class="iframeurl"><i class="icon-double-angle-right"></i>活动列表</a></li>
                                     @*<li class="home"><a href="javascript:void(0)" name="integration.html" title="会员记录管理" class="iframeurl"><i class="icon-double-angle-right"></i>未处理订单</a></li>*@
                                 </ul>
@@ -409,12 +411,12 @@
                                     <li class="home"><a href="/XJW/ShowHYCustom" name="Shop_list.html" title="会员列表" class="iframeurl"><i class="icon-double-angle-right"></i>会员列表</a></li>
                                 </ul>
                             </li>
-                            <li class="home"><a href="javascript:void(0)" name="Shops_Audit.html" title="在线充值" class="iframeurl"><i class="icon-double-angle-right"></i>未处理订单<span class="badge badge-danger">5</span></a></li>
+                            <li class="home"><a href="javascript:void(0)" name="Shops_Audit.html" title="未处理订单" class="iframeurl"><i class="icon-double-angle-right"></i>未处理订单<span class="badge badge-danger">5</span></a></li>
                             <li>
                                 <a href="#" class="dropdown-toggle"><i class="icon-comments-alt"></i><span class="menu-text"> 财务管理 </span><b class="arrow icon-angle-down"></b></a>
                                 <ul class="submenu">
                                     <li class="home"><a href="javascript:void(0)" name="Guestbook.html" title="财务列表" class="iframeurl"><i class="icon-double-angle-right"></i>财务列表</a></li>
-                                    <li class="home"><a href="javascript:void(0)" name="Feedback.html" title="图表显示" class="iframeurl"><i class="icon-double-angle-right"></i>图表显示</a></li>
+                                    <li class="home"><a href="/Zhi/CaiWu" name="Feedback.html" title="图表显示" class="iframeurl"><i class="icon-double-angle-right"></i>图表显示</a></li>
                                 </ul>
                             </li>
                             <li>
@@ -435,7 +437,7 @@
                             <li>
                                 <a href="#" class="dropdown-toggle"><i class="icon-group"></i><span class="menu-text"> 关于我们 </span><b class="arrow icon-angle-down"></b></a>
                                 <ul class="submenu">
-                                    <li class="home"><a href="javascript:void(0)" name="admin_Competence.html" title="关于我们" class="iframeurl"><i class="icon-double-angle-right"></i>关于我们</a></li>
+                                    <li class="home"><a href="/Zhi/GuanYu" name="admin_Competence.html" title="关于我们" class="iframeurl"><i class="icon-double-angle-right"></i>关于我们</a></li>
                                 </ul>
                             </li>
                         }
@@ -447,7 +449,7 @@
                                     <li class="home"><a href="/XJW/ShowSHMovieHall" name="Guestbook.html" title="需打扫的放映厅" class="iframeurl"><i class="icon-double-angle-right"></i>需打扫的放映厅</a></li>
                                 </ul>
                             </li>
-                            <li class="home"><a href="javascript:void(0)" name="Shops_Audit.html" title="在线充值" class="iframeurl"><i class="icon-double-angle-right"></i>未处理订单<span class="badge badge-danger">5</span></a></li>
+                            <li class="home"><a href="javascript:void(0)" name="Shops_Audit.html" title="未处理订单" class="iframeurl"><i class="icon-double-angle-right"></i>未处理订单<span class="badge badge-danger">5</span></a></li>
                             <li>
                                 <a href="#" class="dropdown-toggle"><i class="icon-cogs"></i><span class="menu-text"> 个人中心 </span><b class="arrow icon-angle-down"></b></a>
                                 <ul class="submenu">
@@ -504,24 +506,11 @@
                     </ul>
                 </div>
                 <div style="border: 0;width: 100%;background-color: #FFF;">
-
-                <!--内容页
-                <iframe id="iframe" style="border:0; width:100%; background-color:#FFF;"name="iframe" frameborder="0" src="home.html">  </iframe>-->
-                <div style="border: 0;width: 100%;background-color: #FFF;">
-                    @RenderBody()
-                </div>
-            </div>
-
-                <!--内容页
-                <iframe id="iframe" style="border:0; width:100%; background-color:#FFF;"name="iframe" frameborder="0" src="home.html">  </iframe>-->
-                @*<div style="width: 100%; background-color: #FFF; ">
                     <div style="width:80%;margin:20px auto;">
                         @RenderBody()
                     </div>
-                </div>*@
-
-                    <!-- /.page-content -->
-                </div><!-- /.main-content -->
+                </div>
+            </div>
 
             <div class="ace-settings-container" id="ace-settings-container">
                 <div class="btn btn-app btn-xs btn-warning ace-settings-btn" id="ace-settings-btn">
