@@ -19,7 +19,7 @@
 <div id="demo1"></div>
 
 <script>
-    $().ready(function () {
+    $().ready(function () {   
         layui.use(['laypage', 'layer'], function () {
             var laypage = layui.laypage;
             $.ajax({
@@ -40,7 +40,7 @@
                                     var arr = []
                                         , thisData = data.concat().splice(obj.curr * obj.limit - obj.limit, obj.limit);
                                     layui.each(thisData, function (index, item) {
-                                        arr.push("<tr><td>" + item.SId + "</td><td>" + item.M_Name + "</td><td>" + item.H_Name + "</td><td>" + item.S_BeginTime + "</td></tr >");
+                                        arr.push("<tr><td>" + item.SId + "</td><td>" + item.Movie.M_Name + "</td><td>" + item.MovieHall.H_Name + "</td><td>" + item.S_BeginTime + "</td><td>" + item.S_EndTime + "</td></tr >");
                                     });
                                     return arr.join('');
                                 }();
@@ -51,5 +51,48 @@
             })
         });
     });
+    function FindBeginEndTime()
+    {
+        $.ajax({
+            url: "/LmqMVC/ShowMovieHallMethod",
+            type: "get",
+            dataType: "json",
+            success: function (data) {
+                for (var i = 0; i < data.Length; i++) {
+                    if (data[i].S_BeginTime == NowTime) {
+                        ChangeMovieHallStatus2(data[i].MovieHall.HId);
+                    }
+                    if (data[i].S_EndTime == NowTime) {
+                        ChangeMovieHallStatus3(data[i].MovieHall.HId);
+                    }
+                }
+            }
+        })
+    }
+    setInterval(function () {
+        var NowTime = $("#time").html();
+        $.ajax({
+            url: "/LmqMVC/ShowMovieHallMethod",
+            type: "get",
+            dataType: "json",
+            success: function (data) {
+                for (var i = 0; i < data.Length; i++) {
+                    if (data[i].S_BeginTime == NowTime)
+                    {
+                        ChangeMovieHallStatus2(data[i].MovieHall.HId);
+                    }
+                    if (data[i].S_EndTime == NowTime)
+                    {
+                        ChangeMovieHallStatus3(data[i].MovieHall.HId);
+                    }
+                }
+            }
+        })
+    }, 1000);
+    //场次开始时  将放映厅的状态改为放映中
+    function ChangeMovieHallStatus2(HId)
+    {
+        location.href = "/XJW/UpdOn_Time?HId=" + HId;
+    }
 </script>
 

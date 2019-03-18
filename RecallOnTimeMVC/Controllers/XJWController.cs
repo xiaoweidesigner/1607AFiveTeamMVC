@@ -11,6 +11,7 @@ namespace RecallOnTimeMVC.Controllers
 {
     public class XJWController : Controller
     {
+        #region 首页显示所需数据
         //获取清洁部员工的订单数量   指放映厅状态为需打扫的数量(不包括正在打扫的放映厅)
         public int ShowMovieHallIs3Num()
         {
@@ -26,6 +27,8 @@ namespace RecallOnTimeMVC.Controllers
             List<Order> list = JsonConvert.DeserializeObject<List<Order>>(jsonResult);
             return list.Count;
         }
+        #endregion
+
         #region 登录
         [HttpGet]
         public ActionResult Login()
@@ -104,12 +107,12 @@ namespace RecallOnTimeMVC.Controllers
             }
         }
         //加入会员
-        public void JoinHY(int CId,string C_Name,HttpPostedFileBase file)
+        public void JoinHY(int CId, string C_Name, HttpPostedFileBase file)
         {
-            string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory+"/CustomImg/", file.FileName);
+            string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "/CustomImg/", file.FileName);
             file.SaveAs(path);
             string Img = Server.MapPath("/CustomImg/") + file.FileName;
-            string jsonResult = HttpClientHelper.SendRequest($"api/Xjw/Join?CId={CId}&C_Name={C_Name}&Img={Img}","get");
+            string jsonResult = HttpClientHelper.SendRequest($"api/Xjw/Join?CId={CId}&C_Name={C_Name}&Img={Img}", "get");
             int result = JsonConvert.DeserializeObject<int>(jsonResult);
             if (result > 0)
             {
@@ -134,7 +137,7 @@ namespace RecallOnTimeMVC.Controllers
         //视图
         public ActionResult ShowSHMovieHall()
         {
-            int EId=Convert.ToInt32(Session["EId"]);
+            int EId = Convert.ToInt32(Session["EId"]);
             ViewBag.EId = EId;
             return View();
         }
@@ -146,7 +149,7 @@ namespace RecallOnTimeMVC.Controllers
             return JsonConvert.SerializeObject(list);
         }
         //改变清洁工员工状态为工作中  放映厅为打扫中
-        public void ChangeEMStatus(int EId,int HId)
+        public void ChangeEMStatus(int EId, int HId)
         {
             string jsonResult = HttpClientHelper.SendRequest($"api/Xjw/UpdEmployeeStatus?EId={EId}&HId={HId}", "get");
             int Result = JsonConvert.DeserializeObject<int>(jsonResult);
@@ -171,6 +174,26 @@ namespace RecallOnTimeMVC.Controllers
             else
             {
                 Response.Write("<script>alert('交接失败，请稍等重试！');location.href='/XJW/ShowSHMovieHall'</script>");
+            }
+        }
+        //场次开始时  改变放映厅状态为放映中
+        public void UpdOn_Time(int HId)
+        {
+            string jsonResult = HttpClientHelper.SendRequest($"api/Xjw/ChangeMovieHallStatus2HId={HId}","post");
+            int result = JsonConvert.DeserializeObject<int>(jsonResult);
+            if (result > 0)
+            {
+                Response.Write("<script>location.href='/LmqMVC/SessionS'</script>");
+            }
+        }
+        //场次结束时   改变放映厅状态为需打扫
+        public void UpdXuDaSao(int HId)
+        {
+            string jsonResult = HttpClientHelper.SendRequest($"api/Xjw/ChangeMovieHallStatus3HId={HId}","post");
+            int result = JsonConvert.DeserializeObject<int>(jsonResult);
+            if (result > 0)
+            {
+                Response.Write("<script>location.href='/LmqMVC/SessionS'</script>");
             }
         }
         #endregion
