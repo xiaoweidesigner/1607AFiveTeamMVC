@@ -11,6 +11,21 @@ namespace RecallOnTimeMVC.Controllers
 {
     public class XJWController : Controller
     {
+        //获取清洁部员工的订单数量   指放映厅状态为需打扫的数量(不包括正在打扫的放映厅)
+        public int ShowMovieHallIs3Num()
+        {
+            var str = HttpClientHelper.SendRequest("api/Lmq/ShowMovieHall", "get");
+            var list = JsonConvert.DeserializeObject<List<MovieHall>>(str);
+            list = list.Where(s => s.H_State == 3).ToList();
+            return list.Count;
+        }
+        //获取未处理订单的数量
+        public int ShowOrderNum()
+        {
+            string jsonResult = HttpClientHelper.SendRequest($"api/Zhizhi/ShowOrder", "get");
+            List<Order> list = JsonConvert.DeserializeObject<List<Order>>(jsonResult);
+            return list.Count;
+        }
         #region 登录
         [HttpGet]
         public ActionResult Login()
@@ -28,6 +43,8 @@ namespace RecallOnTimeMVC.Controllers
                 Session["DepartmentId"] = e.DepartMentId;//保存所属部门
                 Session["EId"] = e.EId;//用于修改密码   
                 Session["User"] = e;//用于显示个人资料
+                ViewBag.MovieHallNum = ShowMovieHallIs3Num();//放映厅为需打扫状态的数量
+                ViewBag.OrderNum = ShowOrderNum();//未处理订单的数量
                 Response.Write("<script>alert('登录成功');location.href='/XJW/ShowCustom';</script>");
             }
             else
