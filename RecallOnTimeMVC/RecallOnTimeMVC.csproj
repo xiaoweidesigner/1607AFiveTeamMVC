@@ -278,6 +278,10 @@
     <Content Include="layui\lay\modules\tree.js" />
     <Content Include="layui\lay\modules\upload.js" />
     <Content Include="layui\lay\modules\util.js" />
+    <Content Include="MovieHallImg\20190317065245迎风傲雪厅.jpg" />
+    <Content Include="MovieHallImg\20190317070106雨泣云愁厅.jpg" />
+    <Content Include="MovieHallImg\logo11.png" />
+    <Content Include="MovieImg\20190317074338屏幕截图%289%29.png" />
     <Content Include="MuBan\assets\avatars\avatar.png" />
     <Content Include="MuBan\assets\avatars\avatar1.png" />
     <Content Include="MuBan\assets\avatars\avatar2.png" />
@@ -1049,15 +1053,18 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\LmqMVC\Index.cshtml" />
     <Content Include="Views\XJW\Login.cshtml" />
     <Content Include="Views\XJW\ShowCustom.cshtml" />
+    <Content Include="Views\LmqMVC\AddMovie.cshtml" />
+    <Content Include="Views\LmqMVC\ShowMovie.cshtml" />
+    <Content Include="Views\LmqMVC\ShowMovieById.cshtml" />
+    <Content Include="Views\LmqMVC\ShowMovieHall.cshtml" />
+    <Content Include="Views\LmqMVC\ShowSessionS.cshtml" />
+    <Content Include="Views\LmqMVC\AddSessionS.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="CustomImg\" />
-    <Folder Include="MovieHallImg\" />
-    <Folder Include="MovieImg\" />
     <Folder Include="MuBan\upload\" />
   </ItemGroup>
   <ItemGroup>

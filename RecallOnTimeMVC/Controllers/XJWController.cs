@@ -25,7 +25,7 @@ namespace RecallOnTimeMVC.Controllers
             {
                 Session["Name"] = e.E_Name;//保存姓名
                 Session["DepartmentId"] = e.DepartMentId;//保存所属部门
-                Response.Write("<script>alert('登录成功');location.href='/LmqMVC/Index';</script>");
+                Response.Write("<script>alert('登录成功');location.href='/LmqMVC/AddMovie';</script>");
             }
             else
             {

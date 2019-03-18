@@ -26,5 +26,6 @@ namespace RecallOnTimeMVC.Models
         public string M_Edition { get; set; }//地区
         public DateTime M_Year { get; set; }//年份
         public int M_State { get; set; }//状态 1上架  2下架
+        public int M_Time { get; set; }//时长
     }
 }

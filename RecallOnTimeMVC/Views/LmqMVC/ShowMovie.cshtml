@@ -1,0 +1,67 @@
+﻿@model IEnumerable<RecallOnTimeMVC.Models.Movie>
+@{
+    ViewBag.Title = "ShowMovie";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<table class="layui-table" lay-skin="line">
+    <thead>
+        <tr>
+            <th>编号</th>
+            <th>影片名称</th>
+            <th>图片</th>
+            <th>评分</th>
+            <th>状态</th>
+            <th>单价</th>
+            <th>剧情介绍</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody id="th"></tbody>
+</table>
+<div id="demo1"></div>
+<script>
+    $().ready(function () {
+        layui.use(['laypage'], function () {
+            var laypage = layui.laypage;
+            $.ajax({
+                url: "/LmqMVC/ShowMovieMethod",
+                type: "get",
+                dataType: "json",
+                success: function (data) {
+                    $("#th").empty();
+                    //总页数大于页码总数
+                    for (var i = 0; i < data.length; i++) {
+                        laypage.render({
+                            elem: 'demo1'
+                            , count: data.length//数据总数
+                            , limit: 3
+                            , jump: function (obj) {
+                                //模拟渲染
+                                document.getElementById('th').innerHTML = function () {
+                                    var arr = []
+                                        , thisData = data.concat().splice(obj.curr * obj.limit - obj.limit, obj.limit);
+                                    layui.each(thisData, function (index, item) {
+                                        var page = "";
+                                        page += "<tr>";
+                                        page += "<td>" + item.MId + "</td>";
+                                        page += "<td>" + item.M_Name + "</td>";
+                                        page += "<td><img src='" + item.M_Img + "' alt='' style='width:50px;height:50px;' class='layui-circle' /></td>";
+                                        page += "<td>" + item.M_Grade + "</td>";
+                                        page += "<td>" + item.M_State + "</td>";
+                                        page += "<td>" + item.M_Price + "</td>";
+                                        page += "<td>" + item.M_Plot + "</td>";
+                                        page += "<td><input id='Button1' type='button' class='layui - btn layui - btn - normal layui - btn - radius' value='查看详情' onclick=\"location.href='/LmqMVC/ShowMovieById?Id=" + item.MId + "'\"/></td>";
+                                        arr.push(page);
+                                    });
+                                    return arr.join('');
+                                }();
+                            }
+                        });
+                    }
+                }
+            })
+        });
+    });
+</script>
+
