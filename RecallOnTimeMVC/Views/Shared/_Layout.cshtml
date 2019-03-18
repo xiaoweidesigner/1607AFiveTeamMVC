@@ -33,8 +33,10 @@
     <script src="~/layui/layui.js"></script>
     <script type="text/javascript">
         if ("ontouchend" in document) document.write("<script src='~/MuBan/assets/js/jquery.mobile.custom.min.js'>" + "<" + "script>");
+        
     </script>
     <script type="text/javascript">
+
         $(function () {
             var cid = $('#nav_list> li>.submenu');
             cid.each(function (i) {
@@ -102,19 +104,7 @@
                 $('#nav_list,.link_cz').find('li.home').removeClass('active');
                 $(this).addClass('active');
             });
-            //时间设置
-            function currentTime() {
-                var d = new Date(), str = '';
-                str += d.getFullYear() + '年';
-                str += d.getMonth() + 1 + '月';
-                str += d.getDate() + '日';
-                str += d.getHours() + '时';
-                str += d.getMinutes() + '分';
-                str += d.getSeconds() + '秒';
-                return str;
-            }
-
-            setInterval(function () { $('#time').html(currentTime) }, 1000);
+            
             //修改密码
             $('.change_Password').on('click', function () {
                 layer.open({
@@ -232,7 +222,6 @@
                 },
                     function () {
                         location.href = "login.html";
-
                     });
             });
         });
@@ -285,7 +274,14 @@
                     <li class="purple">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#"><i class="icon-bell-alt"></i><span class="badge badge-important">8</span></a>
                         <ul class="pull-right dropdown-navbar navbar-pink dropdown-menu dropdown-caret dropdown-close">
-                            <li class="dropdown-header"><i class="icon-warning-sign"></i>8条通知</li>
+                            @if (Convert.ToInt32(Session["DepartmentId"]) == 2)
+                            {
+                                <li class="dropdown-header"><i class="icon-warning-sign"></i><a href="/LmqMVC/ShowOrder"> @ViewBag.OrderNum 条通知</a></li>
+                            }
+                            else if (Convert.ToInt32(Session["DepartmentId"]) == 1)
+                            {
+                                <li class="dropdown-header"><i class="icon-warning-sign"></i><a href="/XJW/ShowSHMovieHall">@ViewBag.ShowMovieHallIs3Num 条通知</a></li>
+                            }
                             <li>
                                 <a href="#">
                                     <div class="clearfix">
@@ -293,7 +289,7 @@
                                             <i class="btn btn-xs no-hover btn-pink icon-comments-alt"></i>
                                             未处理订单
                                         </span>
-                                        <span class="pull-right badge badge-info">+12</span>
+                                        <span class="pull-right badge badge-info">@ViewBag.OrderNum</span>
                                     </div>
                                 </a>
                             </li>
@@ -360,7 +356,7 @@
                 </div><!-- #sidebar-shortcuts -->
                 <div id="menu_style" class="menu_style">
                     <ul class="nav nav-list" id="nav_list">
-                        <li class="home"><a href="javascript:void(0)" name="home.html" class="iframeurl" title=""><i class="icon-home"></i><span class="menu-text"> 系统首页 </span></a></li>
+                        <li class="home"><a href="/Zhi/Index" name="home.html" class="iframeurl" title=""><i class="icon-home"></i><span class="menu-text"> 系统首页 </span></a></li>
                         @if (Convert.ToInt32(Session["DepartmentId"]) == 2)
                         {
                             <li>
@@ -375,7 +371,7 @@
                             <li>
                                 <a href="#" class="dropdown-toggle"><i class="icon-picture "></i><span class="menu-text"> 场次管理 </span><b class="arrow icon-angle-down"></b></a>
                                 <ul class="submenu">
-                                    <li class="home"><a href="javascript:void(0)" name="advertising.html" title="场次列表" class="iframeurl"><i class="icon-double-angle-right"></i>场次列表</a></li>
+                                    <li class="home"><a href="/LmqMVC/ShowSessionS" name="advertising.html" title="场次列表" class="iframeurl"><i class="icon-double-angle-right"></i>场次列表</a></li>
                                     @*<li class="home"><a href="javascript:void(0)" name="Sort_ads.html" title="分类管理" class="iframeurl"><i class="icon-double-angle-right"></i>分类管理</a></li>*@
                                 </ul>
                             </li>
@@ -411,7 +407,7 @@
                                     <li class="home"><a href="/XJW/ShowHYCustom" name="Shop_list.html" title="会员列表" class="iframeurl"><i class="icon-double-angle-right"></i>会员列表</a></li>
                                 </ul>
                             </li>
-                            <li class="home"><a href="javascript:void(0)" name="Shops_Audit.html" title="未处理订单" class="iframeurl"><i class="icon-double-angle-right"></i>未处理订单<span class="badge badge-danger">5</span></a></li>
+                            <li class="home"><a href="/LmqMVC/ShowOrder" name="Shops_Audit.html" title="未处理订单" class="iframeurl"><i class="icon-double-angle-right"></i>未处理订单<span class="badge badge-danger">@ViewBag.OrderNum</span></a></li>
                             <li>
                                 <a href="#" class="dropdown-toggle"><i class="icon-comments-alt"></i><span class="menu-text"> 财务管理 </span><b class="arrow icon-angle-down"></b></a>
                                 <ul class="submenu">
@@ -422,7 +418,7 @@
                             <li>
                                 <a href="#" class="dropdown-toggle"><i class="icon-bookmark"></i><span class="menu-text"> 评论管理 </span><b class="arrow icon-angle-down"></b></a>
                                 <ul class="submenu">
-                                    <li class="home"><a href="javascript:void(0)" name="article_list.html" title="评论列表" class="iframeurl"><i class="/WangLuChao/ShowComment"></i>评论列表</a></li>
+                                    <li class="home"><a href="/WangLuChao/ShowComment" name="article_list.html" title="评论列表" class="iframeurl"><i class="/WangLuChao/ShowComment"></i>评论列表</a></li>
                                     @*<li class="home"><a href="javascript:void(0)" name="article_Sort.html" title="分类管理" class="iframeurl"><i class="icon-double-angle-right"></i>分类管理</a></li>*@
                                 </ul>
                             </li>
@@ -449,7 +445,7 @@
                                     <li class="home"><a href="/XJW/ShowSHMovieHall" name="Guestbook.html" title="需打扫的放映厅" class="iframeurl"><i class="icon-double-angle-right"></i>需打扫的放映厅</a></li>
                                 </ul>
                             </li>
-                            <li class="home"><a href="javascript:void(0)" name="Shops_Audit.html" title="未处理订单" class="iframeurl"><i class="icon-double-angle-right"></i>未处理订单<span class="badge badge-danger">5</span></a></li>
+                            <li class="home"><a href="/XJW/ShowSHMovieHall" name="Shops_Audit.html" title="未处理订单" class="iframeurl"><i class="icon-double-angle-right"></i>未处理订单<span class="badge badge-danger">@ViewBag.MovieHallNum</span></a></li>
                             <li>
                                 <a href="#" class="dropdown-toggle"><i class="icon-cogs"></i><span class="menu-text"> 个人中心 </span><b class="arrow icon-angle-down"></b></a>
                                 <ul class="submenu">
@@ -562,6 +558,22 @@
 
 </body>
 </html>
-
+<script type="text/javascript">
+    //时间设置
+    function currentTime() {
+        var d = new Date(), str = '';
+        str += d.getFullYear() + '年';
+        str += d.getMonth() + 1 + '月';
+        str += d.getDate() + '日';
+        str += d.getHours() + '时';
+        str += d.getMinutes() + '分';
+        str += d.getSeconds() + '秒';
+        return str;
+    }
+    $().ready(function () {
+        setInterval();
+    })
+    setInterval(function () { $('#time').html(currentTime) }, 1000);
+</script>
 
 
