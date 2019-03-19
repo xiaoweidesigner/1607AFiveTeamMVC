@@ -51,7 +51,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Net.Http.Formatting">
-      <HintPath>C:\Users\Administrator\Desktop\新建文件夹\System.Net.Http.Formatting.dll</HintPath>
+      <HintPath>..\..\项目\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -1231,6 +1231,9 @@
     <Content Include="Views\LmqMVC\ShowMovieHall.cshtml" />
     <Content Include="Views\LmqMVC\ShowSessionS.cshtml" />
     <Content Include="Views\LmqMVC\AddSessionS.cshtml" />
+    <Content Include="Views\LmqMVC\ShowOrder.cshtml" />
+    <Content Include="Views\LmqMVC\ShowDisposedOrder.cshtml" />
+    <Content Include="Views\LmqMVC\ShowUndisposedOrder.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

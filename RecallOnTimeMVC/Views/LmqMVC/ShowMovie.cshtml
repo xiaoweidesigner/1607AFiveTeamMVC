@@ -1,4 +1,4 @@
-﻿@model IEnumerable<RecallOnTimeMVC.Models.Movie>
+﻿
 @{
     ViewBag.Title = "ShowMovie";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -42,16 +42,23 @@
                                     var arr = []
                                         , thisData = data.concat().splice(obj.curr * obj.limit - obj.limit, obj.limit);
                                     layui.each(thisData, function (index, item) {
+                                        var jia = "";
+                                        if (item.M_State == 1) {
+                                            jia = "<td>上架<input type='button' value='下架' class='layui-btn layui-btn-radius layui-btn-normal' onclick='DownJia(" + item.MId + ")' /></td>";
+                                        }
+                                        else if (item.M_State == 2){
+                                            jia = "<td>下架<input type='button' value='上架' class='layui-btn layui-btn-radius layui-btn-normal' onclick='UpJia(" + item.MId + ")' /></td>";
+                                        }
                                         var page = "";
                                         page += "<tr>";
                                         page += "<td>" + item.MId + "</td>";
                                         page += "<td>" + item.M_Name + "</td>";
                                         page += "<td><img src='" + item.M_Img + "' alt='' style='width:50px;height:50px;' class='layui-circle' /></td>";
                                         page += "<td>" + item.M_Grade + "</td>";
-                                        page += "<td>" + item.M_State + "</td>";
+                                        page += jia;
                                         page += "<td>" + item.M_Price + "</td>";
                                         page += "<td>" + item.M_Plot + "</td>";
-                                        page += "<td><input id='Button1' type='button' class='layui - btn layui - btn - normal layui - btn - radius' value='查看详情' onclick=\"location.href='/LmqMVC/ShowMovieById?Id=" + item.MId + "'\"/></td>";
+                                        page += "<td><input id='Button1' type='button' class='layui-btn layui-btn-warm layui-btn-radius' value='详情' onclick=\"location.href='/LmqMVC/ShowMovieById?Id=" + item.MId + "'\"/></td>";
                                         arr.push(page);
                                     });
                                     return arr.join('');
@@ -63,5 +70,23 @@
             })
         });
     });
+    function DownJia(mid){
+        $.ajax({
+            url: '/LmqMVC/UpdJia?State=2&Mid=' + mid,
+            type: 'post',
+            success: function (data) {
+                location.reload();//刷新页面
+            }
+        })
+    };
+    function UpJia(mid) {
+        $.ajax({
+            url: '/LmqMVC/UpdJia?State=1&Mid=' + mid,
+            type: 'post',
+            success: function (data) {
+                    location.reload();//刷新页面
+            }
+        })
+    };
 </script>
 

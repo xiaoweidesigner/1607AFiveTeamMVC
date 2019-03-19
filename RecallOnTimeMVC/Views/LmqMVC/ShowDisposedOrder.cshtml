@@ -1,29 +1,29 @@
 ﻿
 @{
-    ViewBag.Title = "ShowSessionS";
+    ViewBag.Title = "ShowDisposedOrder";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<input id="Button1" type="button" value="添加场次" class="btn btn-info" onclick="location.href = '/LmqMVC/AddSessionS';" />
 <table class="layui-table" lay-skin="line">
     <thead>
         <tr>
-            <th>场次编号</th>
+            <th>订单编号</th>
+            <th>购买者</th>
             <th>电影名称</th>
-            <th>放映厅名称</th>
+            <th>影厅名称</th>
             <th>开始时间</th>
+            <th>手机号</th>
+            <th>金额</th>
         </tr>
     </thead>
     <tbody id="th"></tbody>
 </table>
-
 <div id="demo1"></div>
-
 <script>
     $().ready(function () {
         layui.use(['laypage'], function () {
             var laypage = layui.laypage;
             $.ajax({
-                url: "/LmqMVC/ShowSessionSMethod",
+                url: "/LmqMVC/ShowDisposedOrderM",
                 type: "get",
                 dataType: "json",
                 success: function (data) {
@@ -40,7 +40,18 @@
                                     var arr = []
                                         , thisData = data.concat().splice(obj.curr * obj.limit - obj.limit, obj.limit);
                                     layui.each(thisData, function (index, item) {
-                                        arr.push("<tr><td>" + item.SId + "</td><td>" + item.Movie.M_Name + "</td><td>" + item.MovieHall.H_Name + "</td><td>" + item.S_BeginTime + "</td></tr >");
+                                        var page = "";
+                                        page += "<tr>";
+                                        page += "<td>" + item.OId + "</td>";
+                                        page += "<td>" + item.Custom.C_Name + "</td>";
+                                        page += "<td>" + item.SessionS.MovieId + "</td>";
+                                        page += "<td>" + item.SessionS.MovieHallId + "</td>";
+                                        page += "<td>" + item.SessionS.S_BeginTime + "</td>";
+                                        //page += "<td>" + item.SessionS.MovieHall.Seat.Number + "</td>";
+                                        page += "<td>" + item.Custom.C_Cellphone + "</td>";
+                                        page += "<td>" + item.O_Money + "</td>";
+                                        page += "</tr>";
+                                        arr.push(page);
                                     });
                                     return arr.join('');
                                 }();
@@ -49,6 +60,7 @@
                     }
                 }
             })
+
         });
     });
 </script>

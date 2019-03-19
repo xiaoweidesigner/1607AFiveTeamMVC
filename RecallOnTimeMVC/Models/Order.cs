@@ -21,8 +21,11 @@ namespace RecallOnTimeMVC.Models
         public int O_State { get; set; }//状态
         //[ForeignKey("Seat")]
         //public int SeatId { get; set; }//座位表外键
-
         //public Seat Seat { get; set; }
+        [NotMapped]
+        public string MName { get; set; }
+        [NotMapped]
+        public string HName { get; set; }
         public SessionS SessionS { get; set; }
         public Custom Custom { get; set; }
     }

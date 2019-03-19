@@ -44,8 +44,19 @@
                                 var arr = []
                                     , thisData = data.concat().splice(obj.curr * obj.limit - obj.limit, obj.limit);
                                 layui.each(thisData, function (index, item) {
-                                    arr.push("<tr><td>" + item.HId + "</td><td>" + item.H_Name + "</td><td><img src='" + item.H_Photo + "' width='50' height='50' class='layui-circle' alt='' /></td><td>" + item.H_State + "</td></tr >");
-                                });
+                                    var state = "";
+                                    switch (item.H_State) {
+                                        case 1: state="空闲中"
+                                            break;
+                                        case 2: state = "播放中";
+                                            break;
+                                        case 3: state = "需打扫";
+                                            break;
+                                        case 4: state = "打扫中";
+                                            break;
+                                    }
+                                    arr.push("<tr><td>" + item.HId + "</td><td>" + item.H_Name + "</td><td><img src='" + item.H_Photo + "' width='50' height='50' class='layui-circle' alt='' /></td><td>" + state + "</td></tr >");
+                                    });
                                 return arr.join('');
                             }();
                         }

@@ -15,7 +15,6 @@ namespace RecallOnTimeMVC.Models
         public int SId { get; set; }//编号
         [ForeignKey("Movie")]
         public int MovieId { get; set; }//电影外键
-
         [ForeignKey("MovieHall")]
         public int MovieHallId { get; set; }//放映厅外键
         public DateTime S_BeginTime { get; set; }//开始时间
