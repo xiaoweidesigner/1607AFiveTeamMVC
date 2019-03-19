@@ -56,11 +56,33 @@ namespace RecallOnTimeMVC.Controllers
             var movie= JsonConvert.DeserializeObject<Movie>(str);
             return View(movie);
         }
-        //修改上下架
-        public string UpdJia(int State, int Mid)
+        //上架
+        public void Up(int MId)
         {
-            var i = HttpClientHelper.SendRequest($"api/Lmq/UpdJia?State={State}&Mid={Mid}", "put");
-            return i;
+            string jsonResult = HttpClientHelper.SendRequest($"api/Lmq/UP?MId={MId}", "post");
+            int result = JsonConvert.DeserializeObject<int>(jsonResult);
+            if (result > 0)
+            {
+                Response.Write("<script>alert('影片已上架');location.href='/LmqMVC/ShowMovie';</script>");
+            }
+            else
+            {
+                Response.Write("<script>alert('上架失败');location.href='/LmqMVC/ShowMovie';</script>");
+            }
+        }
+        //下架
+        public void Down(int MId)
+        {
+            string jsonResult = HttpClientHelper.SendRequest($"api/Lmq/Down?MId={MId}", "post");
+            int result = JsonConvert.DeserializeObject<int>(jsonResult);
+            if (result > 0)
+            {
+                Response.Write("<script>alert('影片已下架');location.href='/LmqMVC/ShowMovie';</script>");
+            }
+            else
+            {
+                Response.Write("<script>alert('下架失败');location.href='/LmqMVC/ShowMovie';</script>");
+            }
         }
         #endregion
         #region 场次
@@ -152,8 +174,8 @@ namespace RecallOnTimeMVC.Controllers
             return View();
         }
         public string ShowOrderMethod() {
-            var str = HttpClientHelper.SendRequest("api/Zhizhi/ShowOrder", "get");
-            var list = JsonConvert.DeserializeObject<List<Order>>(str);
+            string str = HttpClientHelper.SendRequest("api/Zhizhi/ShowAll", "get");
+            List<OMCH> list = JsonConvert.DeserializeObject<List<OMCH>>(str);
             return JsonConvert.SerializeObject(list);
         }
         //已处理订单 1
@@ -162,8 +184,8 @@ namespace RecallOnTimeMVC.Controllers
         }
         public string ShowDisposedOrderM()
         {
-            var str = HttpClientHelper.SendRequest("api/Zhizhi/ShowOrder", "get");
-            var list = JsonConvert.DeserializeObject<List<Order>>(str);
+            var str = HttpClientHelper.SendRequest("api/Zhizhi/ShowAll", "get");
+            var list = JsonConvert.DeserializeObject<List<OMCH>>(str);
             var showList = list.Where(l=>l.O_State==1);
             return JsonConvert.SerializeObject(showList);
         }
@@ -173,15 +195,23 @@ namespace RecallOnTimeMVC.Controllers
         }
         public string ShowUndisposedOrderM()
         {
-            var str = HttpClientHelper.SendRequest("api/Zhizhi/ShowOrder", "get");
-            var list = JsonConvert.DeserializeObject<List<Order>>(str);
+            var str = HttpClientHelper.SendRequest("api/Zhizhi/ShowAll", "get");
+            var list = JsonConvert.DeserializeObject<List<OMCH>>(str);
             var showList = list.Where(l => l.O_State == 2);
             return JsonConvert.SerializeObject(showList);
         }
         //处理订单状态
-        public string DisposeOrder(int Oid) {
-            var i = HttpClientHelper.SendRequest($"api/Zhizhi/DisposedOrder?Oid={Oid}", "put");
-            return i;
+        public void DisposeOrder(int Oid) {
+            string jsonResult = HttpClientHelper.SendRequest($"api/Zhizhi/UpdOrderState?OId={Oid}", "post");
+            int result = JsonConvert.DeserializeObject<int>(jsonResult);
+            if (result > 0)
+            {
+                Response.Write("<script>alert('已处理此条订单');location.href='/LmqMVC/ShowOrder';</script>");
+            }
+            else
+            {
+                Response.Write("<script>alert('出错了，请重试');location.href='/LmqMVC/ShowOrder';</script>");
+            }
         }
         #endregion
     }

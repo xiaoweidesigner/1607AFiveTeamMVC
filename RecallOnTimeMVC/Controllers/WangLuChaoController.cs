@@ -45,7 +45,7 @@ namespace RecallOnTimeMVC.Controllers
             string result = HttpClientHelpers.Send("post", "/api/WangLuChao/AddDepartMent", json);
             if (Convert.ToInt32(result) > 0)
             {
-                Response.Write("<script><script>alert('ok');location.href='/WangLuChao/ShowDepartMent'</script>");
+                Response.Write("<script>alert('ok');location.href='/WangLuChao/ShowDepartMent'</script>");
             }
             else
             {
@@ -117,7 +117,7 @@ namespace RecallOnTimeMVC.Controllers
             return View();
         }
         [HttpPost]
-        public string UpdEmployees(Employee mm, HttpPostedFileBase E_Img)
+        public void UpdEmployees(Employee mm, HttpPostedFileBase E_Img)
         {
             if (E_Img!=null)   
             {
@@ -131,13 +131,12 @@ namespace RecallOnTimeMVC.Controllers
             string result = HttpClientHelpers.Send("post", "/api/WangLuChao/UpdEmployee", json);
             if (Convert.ToInt32(result) > 0)
             {
-                Response.Write("<script>alert('ok');location.href='/XJW/EditPerpon'</script>");
+                Response.Write("<script>alert('success');location.href='/XJW/Login'</script>");
             }
             else
             {
-                Response.Write("<script>alert('bu ok')</script>");
+                Response.Write("<script>alert('lose')</script>");
             }
-            return "1";
         }
         /// <summary>
         /// 显示评论信息

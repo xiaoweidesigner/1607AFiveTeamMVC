@@ -53,7 +53,7 @@
                                         page += "<tr>";
                                         page += "<td>" + item.MId + "</td>";
                                         page += "<td>" + item.M_Name + "</td>";
-                                        page += "<td><img src='" + item.M_Img + "' alt='' style='width:50px;height:50px;' class='layui-circle' /></td>";
+                                        page += "<td><img src='" + item.M_Img + "' alt='' style='width:50px;height:50px;' /></td>";
                                         page += "<td>" + item.M_Grade + "</td>";
                                         page += jia;
                                         page += "<td>" + item.M_Price + "</td>";
@@ -70,23 +70,19 @@
             })
         });
     });
-    function DownJia(mid){
-        $.ajax({
-            url: '/LmqMVC/UpdJia?State=2&Mid=' + mid,
-            type: 'post',
-            success: function (data) {
-                location.reload();//刷新页面
-            }
-        })
+    //下架
+    function DownJia(mid) {
+        if (confirm("确定下架该影片?"))
+        {
+            location.href = "/LmqMVC/Down?MId=" + mid;
+        }
     };
+    //上架
     function UpJia(mid) {
-        $.ajax({
-            url: '/LmqMVC/UpdJia?State=1&Mid=' + mid,
-            type: 'post',
-            success: function (data) {
-                    location.reload();//刷新页面
-            }
-        })
+        if (confirm("确定上架该影片?"))
+        {
+            location.href = "/LmqMVC/Up?MId=" + mid;
+        }
     };
 </script>
 

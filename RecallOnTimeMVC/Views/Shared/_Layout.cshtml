@@ -205,39 +205,42 @@
                         </ul>
                     </li>
                     <li class="purple">
-                        <a data-toggle="dropdown" class="dropdown-toggle" href="#"><i class="icon-bell-alt"></i><span class="badge badge-important">8</span></a>
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#"><i class="icon-bell-alt"></i><span class="badge badge-important"></span></a>
                         <ul class="pull-right dropdown-navbar navbar-pink dropdown-menu dropdown-caret dropdown-close">
                             @if (Convert.ToInt32(Session["DepartmentId"]) == 2)
                             {
                                 <li class="dropdown-header"><i class="icon-warning-sign"></i><a href="/LmqMVC/ShowOrder"> @ViewBag.OrderNum 条通知</a></li>
+                                <li>
+                                    <a href="/lmqMVC/ShowUndisposedOrder">
+                                        <div class="clearfix">
+                                            <span class="pull-left">
+                                                <i class="btn btn-xs no-hover btn-pink icon-comments-alt"></i>
+                                                未处理订单
+                                            </span>
+                                            <span class="pull-right badge badge-info">@ViewBag.OrderNum</span>
+                                        </div>
+                                    </a>
+                                </li>
                             }
                             else if (Convert.ToInt32(Session["DepartmentId"]) == 1)
                             {
                                 <li class="dropdown-header"><i class="icon-warning-sign"></i><a href="/XJW/ShowSHMovieHall">@ViewBag.ShowMovieHallIs3Num 条通知</a></li>
+                                <li>
+                                    <a href="/XJW/ShowSHMovieHall">
+                                        <div class="clearfix">
+                                            <span class="pull-left">
+                                                <i class="btn btn-xs no-hover btn-pink icon-comments-alt"></i>
+                                                未处理订单
+                                            </span>
+                                            <span class="pull-right badge badge-info">@ViewBag.ShowMovieHallIs3Num</span>
+                                        </div>
+                                    </a>
+                                </li>
                             }
-                            <li>
-                                <a href="#">
-                                    <div class="clearfix">
-                                        <span class="pull-left">
-                                            <i class="btn btn-xs no-hover btn-pink icon-comments-alt"></i>
-                                            未处理订单
-                                        </span>
-                                        <span class="pull-right badge badge-info">@ViewBag.OrderNum</span>
-                                    </div>
-                                </a>
-                            </li>
-
                             <li>
                                 <a href="/XJW/Login">
                                     <i class="btn btn-xs btn-primary icon-user"></i>
                                     注销
-                                </a>
-                            </li>
-
-                            <li>
-                                <a href="#">
-                                    查看所有通知
-                                    <i class="icon-arrow-right"></i>
                                 </a>
                             </li>
                         </ul>
@@ -324,24 +327,23 @@
                                     <li class="home"><a href="/lmqMVC/ShowUndisposedOrder" name="Payment_Configure.html" title="未处理订单" class="iframeurl"><i class="icon-double-angle-right"></i>未处理订单</a></li>
                                 </ul>
                             </li>
-                            <li>
+                            @*<li>
                                 <a href="#" class="dropdown-toggle"><i class="icon-user"></i><span class="menu-text"> 活动管理 </span><b class="arrow icon-angle-down"></b></a>
                                 <ul class="submenu">
                                     <li class="home"><a href="javascript:void(0)" name="user_list.html" title="添加活动" class="iframeurl"><i class="icon-double-angle-right"></i>添加活动</a></li>
                                     <li class="home"><a href="javascript:void(0)" name="member-Grading.html" title="活动列表" class="iframeurl"><i class="icon-double-angle-right"></i>活动列表</a></li>
-                                    @*<li class="home"><a href="javascript:void(0)" name="integration.html" title="会员记录管理" class="iframeurl"><i class="icon-double-angle-right"></i>未处理订单</a></li>*@
+                                    <li class="home"><a href="javascript:void(0)" name="integration.html" title="会员记录管理" class="iframeurl"><i class="icon-double-angle-right"></i>未处理订单</a></li>
                                 </ul>
-                            </li>
+                            </li>*@
                             <li>
                                 <a href="#" class="dropdown-toggle"><i class="icon-laptop"></i><span class="menu-text"> 顾客管理 </span><b class="arrow icon-angle-down"></b></a>
                                 <ul class="submenu">
-                                    <li class="home"><a href="javascript:void(0)" name="Shop_list.html" title="顾客列表" class="iframeurl"><i class="icon-double-angle-right"></i>顾客列表</a></li>
-                                    <li class="home"><a href="javascript:void(0)" name="Shop_list.html" title="在线充值" class="iframeurl"><i class="icon-double-angle-right"></i>在线充值</a></li>
-                                    <li class="home"><a href="javascript:void(0)" name="Shop_list.html" title="普通顾客列表" class="iframeurl"><i class="icon-double-angle-right"></i>普通顾客列表</a></li>
-                                    <li class="home"><a href="javascript:void(0)" name="Shop_list.html" title="会员列表" class="iframeurl"><i class="icon-double-angle-right"></i>会员列表</a></li>
+                                    <li class="home"><a href="/XJW/ShowCustom" name="Shop_list.html" title="顾客列表" class="iframeurl"><i class="icon-double-angle-right"></i>顾客列表</a></li>
+                                    <li class="home"><a href="/XJW/ShowCommonCustom" name="Shop_list.html" title="普通顾客列表" class="iframeurl"><i class="icon-double-angle-right"></i>普通顾客列表</a></li>
+                                    <li class="home"><a href="/XJW/ShowHYCustom" name="Shop_list.html" title="会员列表" class="iframeurl"><i class="icon-double-angle-right"></i>会员列表</a></li>
                                 </ul>
                             </li>
-                            <li class="home"><a href="/LmqMVC/ShowOrder" name="Shops_Audit.html" title="未处理订单" class="iframeurl"><i class="icon-double-angle-right"></i>未处理订单<span class="badge badge-danger">@ViewBag.OrderNum</span></a></li>
+                            <li class="home"><a href="/lmqMVC/ShowUndisposedOrder" name="Shops_Audit.html" title="未处理订单" class="iframeurl"><i class="icon-double-angle-right"></i>未处理订单<span class="badge badge-danger">@ViewBag.OrderNum</span></a></li>
                             <li>
                                 <a href="#" class="dropdown-toggle"><i class="icon-comments-alt"></i><span class="menu-text"> 财务管理 </span><b class="arrow icon-angle-down"></b></a>
                                 <ul class="submenu">
@@ -361,13 +363,13 @@
                                 <ul class="submenu">
                                     <li class="home"><a href="/WangLuChao/XiuMiMa" name="Systems.html" title="修改密码" class="iframeurl"><i class="icon-double-angle-right"></i>修改密码</a></li>
                                     <li class="home"><a href="/XJW/Login" name="System_section.html" title="退出系统" class="iframeurl"><i class="icon-double-angle-right"></i>退出系统</a></li>
-                                    <li class="home"><a href="javascript:void(0)" name="System_Logs.html" title="个人资料" class="iframeurl"><i class="icon-double-angle-right"></i>个人资料</a></li>
+                                    <li class="home"><a href="/XJW/EditPerpon" name="System_Logs.html" title="个人资料" class="iframeurl"><i class="icon-double-angle-right"></i>个人资料</a></li>
                                 </ul>
                             </li>
                             <li>
                                 <a href="#" class="dropdown-toggle"><i class="icon-group"></i><span class="menu-text"> 关于我们 </span><b class="arrow icon-angle-down"></b></a>
                                 <ul class="submenu">
-                                    <li class="home"><a href="javascript:void(0)" name="admin_Competence.html" title="关于我们" class="iframeurl"><i class="icon-double-angle-right"></i>关于我们</a></li>
+                                    <li class="home"><a href="/Zhi/GuanYu" name="admin_Competence.html" title="关于我们" class="iframeurl"><i class="icon-double-angle-right"></i>关于我们</a></li>
                                 </ul>
                             </li>
                         }
@@ -376,7 +378,7 @@
                             <li>
                                 <a href="#" class="dropdown-toggle"><i class="icon-comments-alt"></i><span class="menu-text"> 工作安排 </span><b class="arrow icon-angle-down"></b></a>
                                 <ul class="submenu">
-                                    <li class="home"><a href="javascript:void(0)" name="Guestbook.html" title="需打扫的放映厅" class="iframeurl"><i class="icon-double-angle-right"></i>需打扫的放映厅</a></li>
+                                    <li class="home"><a href="/XJW/ShowSHMovieHall" name="Guestbook.html" title="需打扫的放映厅" class="iframeurl"><i class="icon-double-angle-right"></i>需打扫的放映厅</a></li>
                                 </ul>
                             </li>
                             <li class="home"><a href="/XJW/ShowSHMovieHall" name="Shops_Audit.html" title="未处理订单" class="iframeurl"><i class="icon-double-angle-right"></i>未处理订单<span class="badge badge-danger">@ViewBag.MovieHallNum</span></a></li>
@@ -396,7 +398,7 @@
                                 <ul class="submenu">
                                     <li class="home"><a href="/WangLuChao/XiuMiMa" name="Systems.html" title="修改密码" class="iframeurl"><i class="icon-double-angle-right"></i>修改密码</a></li>
                                     <li class="home"><a href="/XJW/Login" name="System_section.html" title="退出系统" class="iframeurl"><i class="icon-double-angle-right"></i>退出系统</a></li>
-                                    <li class="home"><a href="javascript:void(0)" name="System_Logs.html" title="个人资料" class="iframeurl"><i class="icon-double-angle-right"></i>个人资料</a></li>
+                                    <li class="home"><a href="/XJW/EditPerpon" name="System_Logs.html" title="个人资料" class="iframeurl"><i class="icon-double-angle-right"></i>个人资料</a></li>
                                 </ul>
                             </li>
                         }

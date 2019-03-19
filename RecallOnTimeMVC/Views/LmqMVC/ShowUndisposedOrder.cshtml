@@ -13,6 +13,7 @@
             <th>开始时间</th>
             <th>手机号</th>
             <th>金额</th>
+            <th>状态</th>
         </tr>
     </thead>
     <tbody id="th"></tbody>
@@ -43,13 +44,14 @@
                                         var page = "";
                                         page += "<tr>";
                                         page += "<td>" + item.OId + "</td>";
-                                        page += "<td>" + item.Custom.C_Name + "</td>";
-                                        page += "<td>" + item.SessionS.MovieId + "</td>";
-                                        page += "<td>" + item.SessionS.MovieHallId + "</td>";
-                                        page += "<td>" + item.SessionS.S_BeginTime + "</td>";
+                                        page += "<td>" + item.CName + "</td>";
+                                        page += "<td>" + item.MName + "</td>";
+                                        page += "<td>" + item.HName + "</td>";
+                                        page += "<td>" + item.BeginTime + "</td>";
                                         //page += "<td>" + item.SessionS.MovieHall.Seat.Number + "</td>";
-                                        page += "<td>" + item.Custom.C_Cellphone + "</td>";
+                                        page += "<td>" + item.Phone + "</td>";
                                         page += "<td>" + item.O_Money + "</td>";
+                                        page += "<td>未处理 <input type='button' class='layui-btn layui-btn-radius layui-btn-normal' value='处理' onclick='Dispose(" + item.OId + ")'/></td>"
                                         page += "</tr>";
                                         arr.push(page);
                                     });
@@ -63,5 +65,8 @@
 
         });
     });
+    function Dispose(oid) {
+        location.href = "/LmqMVC/DisposeOrder?Oid=" + oid;
+    }
 </script>
 

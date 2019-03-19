@@ -42,22 +42,22 @@
                                         , thisData = data.concat().splice(obj.curr * obj.limit - obj.limit, obj.limit);
                                     layui.each(thisData, function (index, item) {
                                         var str = "";
-                                        switch (item.O_State) {
-                                            case 1: str = "<td>已处理</td>"
-                                                break;
-                                            case 2: str="<td>未处理<input type='button' class='layui-btn layui-btn-radius layui-btn-normal' value='处理' onclick='Dispose(" + item.OId + ")'/></td>"
-                                                break;
+                                        if (item.O_State == 1) {
+                                            str = "<td>已处理</td>";
                                         }
-                                        
+                                        else if (item.O_State == 2)
+                                        {
+                                            str = "<td>未处理 <input type='button' class='layui-btn layui-btn-radius layui-btn-normal' value='处理' onclick='Dispose(" + item.OId + ")'/></td>";
+                                        }
                                         var page = "";
                                         page += "<tr>";
                                         page += "<td>" + item.OId + "</td>";
-                                        page += "<td>" + item.Custom.C_Name + "</td>";
+                                        page += "<td>" + item.CName + "</td>";
                                         page += "<td>" + item.MName + "</td>";
                                         page += "<td>" + item.HName + "</td>";
-                                        page += "<td>" + item.SessionS.S_BeginTime + "</td>";
+                                        page += "<td>" + item.BeginTime+ "</td>";
                                         //page += "<td>" + item.SessionS.MovieHall.Seat.Number + "</td>";
-                                        page += "<td>" + item.Custom.C_Cellphone + "</td>";
+                                        page += "<td>" + item.Phone + "</td>";
                                         page += "<td>" + item.O_Money + "</td>";
                                         page += str;
                                         page += "</tr>";
@@ -74,12 +74,6 @@
         });
     });
     function Dispose(oid) {
-        $.ajax({
-            url: '/LmqMVC/DisposeOrder?Oid=' + oid,
-            type: 'post',
-            success: function (data) {
-                location.reload();//刷新页面
-            }
-        })
+        location.href = "/LmqMVC/DisposeOrder?Oid=" + oid;
     }
 </script>

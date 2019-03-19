@@ -39,9 +39,9 @@
 </head>
 
 <body>
-    <input type="button" class="" value="返回" onclick="location.href='/XJW/ShowCustom'" />
+    <input type="button" value="返回" onclick="location.href='/XJW/ShowCustom'" />
     <div class=" page-content clearfix">
-         <span style="font-size:20px;margin-left:450px" >选择需要查询的日期:</span>        
+        <span style="font-size:20px;margin-left:450px">选择需要查询的日期:</span>
         <select name="year1" id="nian" style="margin-left:50px"></select>
         <select name="month1" id="yue" style="margin-left:50px"></select>
         <select name="day1" id="ri" style="margin-left:50px"></select>
@@ -124,7 +124,7 @@
                 var nian = $("#nian").val();
                 var yue = $("#yue").val();
                 var ri = $("#ri").val();
-                document.getElementById('cx').href = "/Zhi/shuju/?nian=" + nian + "&yue=" + yue + "&ri=" + ri;     
+                document.getElementById('cx').href = "/Zhi/shuju/?nian=" + nian + "&yue=" + yue + "&ri=" + ri;
             }
 
 
@@ -132,5 +132,6 @@
         <div style="text-align:center;clear:both">
             <script src="/gg_bd_ad_720x90-2.js" type="text/javascript"></script>
         </div>
-    </div></body>
+    </div>
+</body>
 </html>
