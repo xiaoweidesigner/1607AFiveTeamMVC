@@ -19,8 +19,8 @@
 <div id="demo1"></div>
 
 <script>
-    $().ready(function () {
-        layui.use(['laypage'], function () {
+    $().ready(function () {   
+        layui.use(['laypage', 'layer'], function () {
             var laypage = layui.laypage;
             $.ajax({
                 url: "/LmqMVC/ShowSessionSMethod",
@@ -40,7 +40,7 @@
                                     var arr = []
                                         , thisData = data.concat().splice(obj.curr * obj.limit - obj.limit, obj.limit);
                                     layui.each(thisData, function (index, item) {
-                                        arr.push("<tr><td>" + item.SId + "</td><td>" + item.Movie.M_Name + "</td><td>" + item.MovieHall.H_Name + "</td><td>" + item.S_BeginTime + "</td></tr >");
+                                        arr.push("<tr><td>" + item.SId + "</td><td>" + item.Movie.M_Name + "</td><td>" + item.MovieHall.H_Name + "</td><td>" + item.S_BeginTime + "</td><td>" + item.S_EndTime + "</td></tr >");
                                     });
                                     return arr.join('');
                                 }();
@@ -50,6 +50,7 @@
                 }
             })
         });
+        
     });
 </script>
 

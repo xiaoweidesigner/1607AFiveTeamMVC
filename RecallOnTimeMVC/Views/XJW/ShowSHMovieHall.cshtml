@@ -9,7 +9,6 @@
         <tr>
             <th>影厅编号</th>
             <th>影厅名称</th>
-            <th>影厅名称</th>
             <th>影厅图片</th>
             <th>影厅状态</th>
             <th>去打扫</th>
@@ -45,10 +44,10 @@
                                     layui.each(thisData, function (index, item) {
                                         var Result = "";
                                         if (item.H_State == 3) {
-                                            Result = "<td style='red'>需打扫</td><td><input type='button' value='去打扫' class='layui-btn layui-btn-radius' onclick='ChangeEMStatus('" + item.HId + "')' /></td><td><input type='button' value='打扫完毕' class='layui-btn layui-btn-disabled layui-btn-radius' /></td>";
+                                            Result = "<td style='red'>需打扫</td><td><input type='button' value='去打扫' class='layui-btn layui-btn-radius' onclick='Upd1(" + item.HId + ")' /></td><td><input type='button' value='打扫完毕' class='layui-btn layui-btn-disabled layui-btn-radius' /></td>";
                                         }
                                         else if (item.H_State == 4) {
-                                            Result = "<td style='red'>打扫中</td><td><input type='button' value='去打扫' class='layui-btn layui-btn-disabled layui-btn-radius' /></td><td><input type='button' value='打扫完毕' class='layui-btn layui-btn-radius' onclick='ChangeEMStatusAndMovieHallStatus('" + item.HId + "')' /></td>";
+                                            Result = "<td style='red'>打扫中</td><td><input type='button' value='去打扫' class='layui-btn layui-btn-disabled layui-btn-radius' /></td><td><input type='button' value='打扫完毕' class='layui-btn layui-btn-radius' onclick='Upd2(" + item.HId + ")' /></td>";
                                         }
                                         arr.push("<tr><td>" + item.HId + "</td><td>" + item.H_Name + "</td><td><img src='" + item.H_Photo + "' width='50' height='50' class='layui-circle' /></td>" + Result + "</tr>");
                                     });
@@ -62,17 +61,17 @@
         })
     });
     //改变员工状态为空闲中 放映厅状态为空闲   Id为影厅Id
-    function ChangeEMStatusAndMovieHallStatus(Id)
+    function Upd2(Id)
     {
         debugger;
         var EId =@ViewBag.EId;//获取员工Id
-        location.href = '/XJW/ChangeEMStatusAndMovieHallStatus?HId=' + Id + "&EId=" + EId;
+        location.href = "/XJW/ChangeEMStatusAndMovieHallStatus?HId=" + Id + "&EId=" + EId;
     }
     //改变员工状态为工作中 放映厅为打扫中
-    function ChangeEMStatus(Id)
+    function Upd1(Id)
     {
         debugger;
         var EId =@ViewBag.EId;//获取员工Id
-        location.href = '/XJW/ChangeEMStatus?EId=' + EId + "&HId=" + Id;
+        location.href = "/XJW/ChangeEMStatus?EId=" + EId + "&HId=" + Id;
     }
 </script>

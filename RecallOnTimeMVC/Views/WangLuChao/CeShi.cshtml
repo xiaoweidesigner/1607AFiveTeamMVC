@@ -4,39 +4,79 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <script src="~/Scripts/jquery-3.3.1.js"></script>
-<tr>
-    <td><label class="layui-form-label">部门</label></td>
-    <td>
-        <select id="Select1">
-            <option>==请选择部门==</option>
-        </select>
-    </td>
-</tr>
-<script>
-    $(function () {
-        $.ajax({
-            url: "http://localhost:5646/api/WangLuChao/ShowDepartMent",
-            dataType: "json",
-            type: "get",
-            success: function (data)
-            {
-                $(data).each(function ()
-                {
-                    $("#Select1").append("<option value=" + data.DId + ">" + data.D_Name + "</option>");
 
-                })
-            }
-        })
-    });
-    //$.ajax({
-    //    type: "gei",
-    //    url: "http://localhost:5646/api/WangLuChao/ShowDepartMent", //此次url改为真正需要的url
-    //    success: function (data, status)
-    //    {
-    //        $.each(data, function (index, item) {
-    //            $("#select").append(  //此处向select中循环绑定数据
-    //                "<option value=" + item.DId + ">" + item.D_Name + "</option>");
-    //        });
-    //    },
-    //});
+
+<div>
+    <form action="/WangLuChao/AddEmployees" method="post" enctype="multipart/form-data" >
+        <table>
+            <tr>
+                <td><label class="layui-form-label">姓名</label></td>
+                <td><input type="text" name="E_Name" placeholder="请输入姓名" class="layui-input"></td>
+            </tr>
+            <tr>
+                <td><label class="layui-form-label">部门</label></td>
+                <td>
+                    <select id="Select1">
+                        <option></option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="layui-form-label">账号</label>
+                </td>
+                <td>
+                    <input type="text" name="E_Account" placeholder="请输入账号" class="layui-input">
+                </td>
+            <tr>
+                <td>
+                    <label class="layui-form-label">密码</label>
+                </td>
+                <td>
+                    <input type="password" name="E_Pwd" placeholder="请输入密码" class="layui-input">
+                </td>
+            </tr>
+            <tr>
+            <tr>
+                <td><label class="layui-form-label">图片</label></td>
+                <td><input id="File1" type="file" name="E_Img" /></td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="layui-form-label">性别</label>
+                </td>
+                <td>
+                    <input type="radio" name="E_Sex" value="0" title="男" checked="">
+                    <input type="radio" name="E_Sex" value="1" title="女">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="layui-form-label">手机</label>
+                </td>
+                <td>
+                    <input type="text" name="E_Phone" placeholder="请输入手机" class="layui-input">
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <input type="submit" class="layui-btn" lay-submit="/WangLuChao/AddEmployees" v-on:click='dataSubmit' value="立即提交" id="gooods" />
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+<script src="~/layui-v2.4.5/layui/layui.all.js"></script>
+<script>
+    $.ajax({
+        url: "/WangLuChao/HHer",
+        dataType: "json",
+        type: "get",
+        success: function (data) {
+            $(data).each(function () {
+                $("#Select1").append("<option value=" + this.DId + ">" + this.D_Name + "</option>");
+            })
+        }
+    })
 </script>

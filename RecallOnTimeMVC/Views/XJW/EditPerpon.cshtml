@@ -7,28 +7,27 @@
 
 <h2>个人资料</h2>
 
-<form class="layui-form" action="/WangLuChao/AddEmployees" method="post" enctype="multipart/form-data" id='fm1' lay-filter="example">
+<form class="layui-form" action="/WangLuChao/UpdEmployees" method="post" enctype="multipart/form-data" id='fm1' lay-filter="example">
+    <input type="hidden" value="@Model.EId" name="EId"/>
     <table class="layui-table" lay-skin="line" >
         <tr>
             <td align="right" width="20%" ></td>
             <td>
                 <img src="@Model.E_Img" width="100" height="100" class="layui-circle" />
+                <input id="File1" type="file" name="E_Img"/>
             </td>
         </tr>
         <tr>
             <td style="width:20%;" align="right" ><label class="layui-form-label">姓名</label></td>
             <td><input type="text" name="E_Name" placeholder="请输入姓名" value="@Model.E_Name" class="layui-input-inline"></td>
         </tr>
-        @*<tr>
-            <td><label class="layui-form-label">部门</label></td>
-            <td lay-search="">@Html.DropDownList("D_Name", ViewBag.GId as IEnumerable<SelectListItem>, "直接选择或搜索选择", new Dictionary<string, object> { { "lay-search", "" }, { "lay-verify", "required" } })</td>
-        </tr>*@
         <tr>
             <td style="width:20%;" align="right"  >
                 <label class="layui-form-label">账号</label>
             </td>
             <td>
                 <input type="text" name="E_Account" placeholder="请输入账号" value="@Model.E_Account" class="layui-input-inline">
+                <input id="Hidden1" type="hidden" name="DepartMentId" value="@Model.DepartMentId" />
             </td>
         </tr>
         <tr>
@@ -60,6 +59,8 @@
             <td>
                 <input type="button" class="layui-btn" onclick="Back()"  value="返回" />
             </td>
+            <td></td>
+            <td> <input type="submit" class="layui-btn" lay-submit="/WangLuChao/UpdEmployees" v-on:click='dataSubmit' value="立即提交" id="gooods" /></td>
         </tr>
     </table>
 </form>
