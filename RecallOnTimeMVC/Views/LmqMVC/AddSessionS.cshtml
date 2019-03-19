@@ -21,18 +21,18 @@
         <td>开始时间</td>
         <td><input type="text" class="layui-inline" name="S_BeginTime" id="date1" placeholder="yyyy-MM-dd HH:mm:ss"></td>        
     </tr>
-    <tr>
+    @*<tr>
         <td>结束时间</td>
         <td><input type="text" class="layui-inline" name="S_EndTime" id="date2" placeholder="yyyy-MM-dd HH:mm:ss"></td>       
-    </tr>
+    </tr>*@
     <tr>
-        <td colspan="2"><input type="submit" value="添加" class="btn btn-default" /></td>
+        <td colspan="2"><input type="submit" value="添加" class="layui-btn" /></td>
     </tr>
 </table>
 
 }
 <div>
-    @Html.ActionLink("返回列表", "ShowSessionS")
+    <input type="button" value="返回列表" class="btn btn-default" onclick="location.href='/LmqMVC/ShowSessionS'"/>
 </div>
 <script>
     

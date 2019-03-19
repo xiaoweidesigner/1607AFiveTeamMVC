@@ -51,7 +51,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Net.Http.Formatting">
-      <HintPath>C:\Users\Administrator\Desktop\新建文件夹\System.Net.Http.Formatting.dll</HintPath>
+      <HintPath>..\..\项目\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -151,6 +151,7 @@
     <Compile Include="Models\Finance.cs" />
     <Compile Include="Models\Movie.cs" />
     <Compile Include="Models\MovieHall.cs" />
+    <Compile Include="Models\OMCH.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\Seat.cs" />
     <Compile Include="Models\SessionS.cs" />
@@ -210,7 +211,12 @@
     <Content Include="html5-canvas-chart-js\html5-canvas-chart-js\src\Chart.Line.js" />
     <Content Include="html5-canvas-chart-js\html5-canvas-chart-js\src\Chart.PolarArea.js" />
     <Content Include="html5-canvas-chart-js\html5-canvas-chart-js\src\Chart.Radar.js" />
+    <Content Include="html5-canvas-chart-js\jquery.min.js" />
     <Content Include="html5-canvas-chart-js\YMDClass.js" />
+    <Content Include="image\1.jpg" />
+    <Content Include="image\2.jpg" />
+    <Content Include="image\3.jpg" />
+    <Content Include="image\4.jpg" />
     <Content Include="image\GU%28G47{I}IMD6MZT%40T[0B96.png" />
     <Content Include="layui-v2.4.5\layui\css\layui.css" />
     <Content Include="layui-v2.4.5\layui\css\layui.mobile.css" />
@@ -1224,10 +1230,8 @@
     <Content Include="Views\LmqMVC\ShowMovieHall.cshtml" />
     <Content Include="Views\XJW\EditPerpon.cshtml" />
     <Content Include="Views\XJW\ShowSHMovieHall.cshtml" />
-    <Content Include="Views\Zhi\CaiWu.cshtml" />
     <Content Include="Views\Zhi\GuanYu.cshtml" />
     <Content Include="Views\Zhi\Index.cshtml" />
-    <Content Include="Views\Zhi\Index1.cshtml" />
     <Content Include="Views\LmqMVC\AddMovie.cshtml" />
     <Content Include="Views\LmqMVC\ShowMovie.cshtml" />
     <Content Include="Views\LmqMVC\ShowMovieById.cshtml" />
@@ -1237,6 +1241,13 @@
     <Content Include="Views\WangLuChao\ShowComment.cshtml" />
     <Content Include="Views\WangLuChao\ShowFinace.cshtml" />
     <Content Include="Views\WangLuChao\XiuMiMa.cshtml" />
+    <Content Include="Views\LmqMVC\ShowOrder.cshtml" />
+    <Content Include="Views\LmqMVC\ShowDisposedOrder.cshtml" />
+    <Content Include="Views\LmqMVC\ShowUndisposedOrder.cshtml" />
+    <Content Include="Views\Zhi\CaiWu.cshtml" />
+    <Content Include="Views\Zhi\Home.cshtml" />
+    <Content Include="Views\Zhi\shuju.cshtml" />
+    <Content Include="Views\XJW\IndexHome.cshtml" />
     <Content Include="Views\WangLuChao\showActivity.cshtml" />
   </ItemGroup>
   <ItemGroup>

@@ -31,11 +31,11 @@ namespace RecallOnTimeMVC.Controllers
             string i = HttpClientHelper.SendRequest("api/Lmq/AddMovie", "post", str);
             if (i == "1")
             {
-                return Content("<script>alert('添加成功')</script>");
+                return Content("<script>alert('添加成功');location.href='/LmqMVC/AddMovie';</script>");
             }
             else
             {
-                return Content("<script>alert('添加失败')</script>");
+                return Content("<script>alert('添加失败')location.href='/LmqMVC/AddMovie';</script>");
             }
         }
         [HttpGet]
@@ -56,18 +56,43 @@ namespace RecallOnTimeMVC.Controllers
             var movie= JsonConvert.DeserializeObject<Movie>(str);
             return View(movie);
         }
+        //上架
+        public void Up(int MId)
+        {
+            string jsonResult = HttpClientHelper.SendRequest($"api/Lmq/UP?MId={MId}", "post");
+            int result = JsonConvert.DeserializeObject<int>(jsonResult);
+            if (result > 0)
+            {
+                Response.Write("<script>alert('影片已上架');location.href='/LmqMVC/ShowMovie';</script>");
+            }
+            else
+            {
+                Response.Write("<script>alert('上架失败');location.href='/LmqMVC/ShowMovie';</script>");
+            }
+        }
+        //下架
+        public void Down(int MId)
+        {
+            string jsonResult = HttpClientHelper.SendRequest($"api/Lmq/Down?MId={MId}", "post");
+            int result = JsonConvert.DeserializeObject<int>(jsonResult);
+            if (result > 0)
+            {
+                Response.Write("<script>alert('影片已下架');location.href='/LmqMVC/ShowMovie';</script>");
+            }
+            else
+            {
+                Response.Write("<script>alert('下架失败');location.href='/LmqMVC/ShowMovie';</script>");
+            }
+        }
         #endregion
         #region 场次
         //显示场次页面
         [HttpGet]
         public ActionResult ShowSessionS() {
-            var str = HttpClientHelper.SendRequest("api/Lmq/ShowSessionS", "get");
-            var list = JsonConvert.DeserializeObject<List<SessionS>>(str);
-            return View(list);
+            return View();
         }
         //实现显示场次功能
-        [HttpPost]
-        public string ShowSessionSMethod(SessionS session)
+        public string ShowSessionSMethod()
         {
             var str = HttpClientHelper.SendRequest("api/Lmq/ShowSessionS", "get");
             var list = JsonConvert.DeserializeObject<List<SessionS>>(str);
@@ -92,24 +117,20 @@ namespace RecallOnTimeMVC.Controllers
         [HttpPost]
         public ActionResult AddSessionS(SessionS session)
         {
-            DateTime d1 = DateTime.Now;
-            DateTime d2;
-            d2 = d1.AddMinutes(100);
             //查询电影时长
             var str = HttpClientHelper.SendRequest("api/Lmq/ShowMovie", "get");
             var list = JsonConvert.DeserializeObject<List<Movie>>(str);
             var mid = list.Where(l => l.MId == session.MovieId).FirstOrDefault().M_Time;//电影时长
-            session.S_EndTime = session.S_BeginTime.Add(TimeSpan.Parse(mid.ToString()));
-            //session.S_EndTime = session.S_BeginTime + mid;
+            session.S_EndTime = session.S_BeginTime.AddMinutes(mid);
             string str1 = JsonConvert.SerializeObject(session);
             string i = HttpClientHelper.SendRequest("api/Lmq/AddSessionS", "post", str1);
             if (i == "1")
             {
-                return Content("<script>alert('添加成功')</script>");
+                return Content("<script>alert('添加成功');location.href='/LmqMVC/AddSessionS';</script>");
             }
             else
             {
-                return Content("<script>alert('添加失败')</script>");
+                return Content("<script>alert('添加失败');location.href='/LmqMVC/AddSessionS';</script>");
             }
         }
 
@@ -139,11 +160,57 @@ namespace RecallOnTimeMVC.Controllers
             string i = HttpClientHelper.SendRequest("api/Lmq/AddMovieHall", "post", str);
             if (i == "1")
             {
-                return "<script>alert('添加成功')</script>";
+                return "<script>alert('添加成功');location.href='/LmqMVC/AddMovieHall';</script>";
             }
             else
             {
-                return "<script>alert('添加失败')</script>";
+                return "<script>alert('添加失败');location.href='/LmqMVC/AddMovieHall';</script>";
+            }
+        }
+
+        #endregion
+        #region 订单
+        public ActionResult ShowOrder() {
+            return View();
+        }
+        public string ShowOrderMethod() {
+            string str = HttpClientHelper.SendRequest("api/Zhizhi/ShowAll", "get");
+            List<OMCH> list = JsonConvert.DeserializeObject<List<OMCH>>(str);
+            return JsonConvert.SerializeObject(list);
+        }
+        //已处理订单 1
+        public ActionResult ShowDisposedOrder() {
+            return View();
+        }
+        public string ShowDisposedOrderM()
+        {
+            var str = HttpClientHelper.SendRequest("api/Zhizhi/ShowAll", "get");
+            var list = JsonConvert.DeserializeObject<List<OMCH>>(str);
+            var showList = list.Where(l=>l.O_State==1);
+            return JsonConvert.SerializeObject(showList);
+        }
+        //未处理订单 2
+        public ActionResult ShowUndisposedOrder() {
+            return View();
+        }
+        public string ShowUndisposedOrderM()
+        {
+            var str = HttpClientHelper.SendRequest("api/Zhizhi/ShowAll", "get");
+            var list = JsonConvert.DeserializeObject<List<OMCH>>(str);
+            var showList = list.Where(l => l.O_State == 2);
+            return JsonConvert.SerializeObject(showList);
+        }
+        //处理订单状态
+        public void DisposeOrder(int Oid) {
+            string jsonResult = HttpClientHelper.SendRequest($"api/Zhizhi/UpdOrderState?OId={Oid}", "post");
+            int result = JsonConvert.DeserializeObject<int>(jsonResult);
+            if (result > 0)
+            {
+                Response.Write("<script>alert('已处理此条订单');location.href='/LmqMVC/ShowOrder';</script>");
+            }
+            else
+            {
+                Response.Write("<script>alert('出错了，请重试');location.href='/LmqMVC/ShowOrder';</script>");
             }
         }
         #endregion
