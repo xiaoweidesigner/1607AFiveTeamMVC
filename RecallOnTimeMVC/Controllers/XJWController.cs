@@ -177,25 +177,7 @@ namespace RecallOnTimeMVC.Controllers
             }
         }
         //场次开始时  改变放映厅状态为放映中
-        public void UpdOn_Time(int HId)
-        {
-            string jsonResult = HttpClientHelper.SendRequest($"api/Xjw/ChangeMovieHallStatus2HId={HId}","post");
-            int result = JsonConvert.DeserializeObject<int>(jsonResult);
-            if (result > 0)
-            {
-                Response.Write("<script>location.href='/LmqMVC/SessionS'</script>");
-            }
-        }
-        //场次结束时   改变放映厅状态为需打扫
-        public void UpdXuDaSao(int HId)
-        {
-            string jsonResult = HttpClientHelper.SendRequest($"api/Xjw/ChangeMovieHallStatus3HId={HId}","post");
-            int result = JsonConvert.DeserializeObject<int>(jsonResult);
-            if (result > 0)
-            {
-                Response.Write("<script>location.href='/LmqMVC/SessionS'</script>");
-            }
-        }
+        //场次结束时   改变放映厅状态为需打扫   sql server作业完成
         #endregion
     }
 }

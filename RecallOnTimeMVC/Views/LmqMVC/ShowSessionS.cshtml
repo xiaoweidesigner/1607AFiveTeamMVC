@@ -50,49 +50,7 @@
                 }
             })
         });
+        
     });
-    function FindBeginEndTime()
-    {
-        $.ajax({
-            url: "/LmqMVC/ShowMovieHallMethod",
-            type: "get",
-            dataType: "json",
-            success: function (data) {
-                for (var i = 0; i < data.Length; i++) {
-                    if (data[i].S_BeginTime == NowTime) {
-                        ChangeMovieHallStatus2(data[i].MovieHall.HId);
-                    }
-                    if (data[i].S_EndTime == NowTime) {
-                        ChangeMovieHallStatus3(data[i].MovieHall.HId);
-                    }
-                }
-            }
-        })
-    }
-    setInterval(function () {
-        var NowTime = $("#time").html();
-        $.ajax({
-            url: "/LmqMVC/ShowMovieHallMethod",
-            type: "get",
-            dataType: "json",
-            success: function (data) {
-                for (var i = 0; i < data.Length; i++) {
-                    if (data[i].S_BeginTime == NowTime)
-                    {
-                        ChangeMovieHallStatus2(data[i].MovieHall.HId);
-                    }
-                    if (data[i].S_EndTime == NowTime)
-                    {
-                        ChangeMovieHallStatus3(data[i].MovieHall.HId);
-                    }
-                }
-            }
-        })
-    }, 1000);
-    //场次开始时  将放映厅的状态改为放映中
-    function ChangeMovieHallStatus2(HId)
-    {
-        location.href = "/XJW/UpdOn_Time?HId=" + HId;
-    }
 </script>
 
