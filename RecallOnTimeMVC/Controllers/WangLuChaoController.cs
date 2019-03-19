@@ -119,11 +119,13 @@ namespace RecallOnTimeMVC.Controllers
         [HttpPost]
         public string UpdEmployees(Employee mm, HttpPostedFileBase E_Img)
         {
-
-            string ee = Server.MapPath("/employImg/");
-            string filename = DateTime.Now.ToString("yyyyMMddHHmmss") + E_Img.FileName;
-            E_Img.SaveAs(ee + filename);
-            mm.E_Img = "/employImg/" + filename;
+            if (E_Img!=null)   
+            {
+                string ee = Server.MapPath("/employImg/");
+                string filename = DateTime.Now.ToString("yyyyMMddHHmmss") + E_Img.FileName;
+                E_Img.SaveAs(ee + filename);
+                mm.E_Img = "/employImg/" + filename;
+            }
             mm.E_State = 1;//状态为
             string json = JsonConvert.SerializeObject(mm);
             string result = HttpClientHelpers.Send("post", "/api/WangLuChao/UpdEmployee", json);
@@ -175,6 +177,13 @@ namespace RecallOnTimeMVC.Controllers
             string fin = HttpClientHelpers.Send("get", "/api/WangLuChao/ShowFinances", null);
             List<Finance> ss = JsonConvert.DeserializeObject<List<Finance>>(fin);
             return JsonConvert.SerializeObject(ss);
+        }
+        [HttpGet]
+        public ActionResult XiuMiMa()
+        {
+            var employee = Session["User"];
+            Employee em = employee as Employee;
+            return View(em);
         }
     }
 }

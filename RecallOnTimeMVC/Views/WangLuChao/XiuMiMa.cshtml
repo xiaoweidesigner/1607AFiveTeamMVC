@@ -1,0 +1,120 @@
+﻿@model RecallOnTimeMVC.Models.Employee
+
+@{
+    ViewBag.Title = "XiuMiMa";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+<style>
+    table {
+        border-collapse: separate;
+        border-spacing: 10px;
+    }
+</style>
+<div class="layui-layer-shade" id="layui-layer-shade46" times="46" style="z-index:19891059;background-color:rgb(0,0,0);opacity:0.3;"></div>
+<div class="layui-layer layui-layer-page layui-layer-rim" id="layui-layer46" type="page" times="46" showtime="0" contype="string" style="z-index:19891060;width:700px;height:320px;top:186px;left:505.5px;">
+    <div class="layui-layer-title" style="cursor:move;">修改密码</div>
+    <div stule="padding:10px;">
+        <form class="layui-form" action="/WangLuChao/UpdEmployees" method="post" enctype="multipart/form-data" id='fm1' lay-filter="example">
+            <table class="layui-anim layui-anim-scale" data-anim="layui-anim-scale">
+                <tr>
+                    <td>原密码：</td>
+                    <td>
+                        <input id="ji" type="hidden" value="@Model.E_Pwd" />
+                        <input id="ss" type="hidden" name="EId" value="@Model.EId" />
+                        <input id="ss" type="hidden" name="E_Name" value="@Model.E_Name" />
+                        <input id="ss" type="hidden" name="DepartMentId" value="@Model.DepartMentId" />
+                        <input id="ss" type="hidden" name="E_Account" value="@Model.E_Account" />
+                        <input id="ss" type="hidden" name="E_Img" value="@Model.E_Img" />
+                        <input id="ss" type="hidden" name="E_Sex" value="@Model.E_Sex" />
+                        <input id="ss" type="hidden" name="E_Phone" value="@Model.E_Phone" />
+                        <input id="YEPwd" type="text" required lay-verify="required" placeholder="请输入原密码" autocomplete="off" class="layui-input" />
+                    </td>
+                    <td>
+                        <span id="YEPwdTxt" style="display:none;color:red">不正确</span>
+                        <span id="YEPwdTxts" style="display:none;color:red">验证成功</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span style="color:red;font-size:8px;">请输入原密码点击验证</span></td>
+                    <td><a onclick="yan()" style="cursor:pointer;color:dodgerblue" onmouseover="this.style.color='red'" onmouseout="this.style.color='dodgerblue'">点击验证</a></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>新密码：</td>
+                    <td>
+
+                        <input readonly="readonly" id="XEPwd" type="text" required lay-verify="required" placeholder="请输入新密码" autocomplete="off" class="layui-input" />
+                    </td>
+                    <td><span id="XEPwdTxt" style="display:none;color:red">请输入新密码</span></td>
+                </tr>
+                <tr>
+                    <td>再次输入：</td>
+                    <td>
+
+                        <input readonly="readonly" id="ZEPwd" name="E_Pwd" onchange="Bian()" type="text" required lay-verify="required" placeholder="请再次输入" autocomplete="off" class="layui-input" />
+                    </td>
+                    <td>
+                        <span id="ZEPwdTxt" style="display:none;color:red">请再次确认密码</span>
+                        <span id="ZEPwdTxts" style="display:none;color:red">两次密码不一致</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                    <td> <input type="submit" class="layui-btn" lay-submit="/WangLuChao/UpdEmployees" v-on:click='dataSubmit' value="立即提交" id="gooods" /></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+            </form>
+</div>
+    <span class="layui-layer-setwin">
+        <a class="layui-layer-ico layui-layer-close layui-layer-close1" href="/XJW/ShowCustom"></a>
+    </span>
+    <span class="layui-layer-resize"></span>
+</div>
+<script>
+    function yan()
+    {
+        var JPwd = $("#ji").val();
+        alert(JPwd);
+        var YEPwd = $("#YEPwd").val();
+        if (YEPwd != null)
+        {
+            if (JPwd != YEPwd) {
+                document.getElementById("YEPwdTxt").style.display = "";
+                document.getElementById("YEPwdTxts").style.display = "none";
+            }
+            else if (JPwd == YEPwd)
+            {
+                document.getElementById("YEPwdTxts").style.display = "";
+                document.getElementById("YEPwdTxt").style.display = "none";
+                $("#XEPwd").removeAttr("readonly");
+                haha();
+            }
+        }
+    }
+    function haha()
+    {
+            var ee = $("ss").val();
+            var XEPwd = $("#XEPwd").val();
+
+        if (XEPwd != null)
+        {
+                $("#ZEPwd").removeAttr("readonly")
+                hehe();
+                //document.getElementById("XEPwdTxt").style.display = "";
+            }
+        }
+    function Bian()
+    {
+            var s1 = $("#XEPwd").val();
+            var s2 = $("#ZEPwd").val();
+        if (s1 != s2)
+        {
+            alert('两次密码不一致');
+        }
+    }
+</script>
+
