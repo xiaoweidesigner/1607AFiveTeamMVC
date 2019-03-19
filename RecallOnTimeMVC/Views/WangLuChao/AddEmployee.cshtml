@@ -11,57 +11,57 @@
     <form  action="/WangLuChao/AddEmployees" method="post" enctype="multipart/form-data">
         <table>
             <tr>
-                <td><label class="layui-form-label">姓名</label></td>
-                <td><input type="text" name="E_Name" placeholder="请输入姓名" class="layui-input"></td>
+                <td style="padding-bottom:30px;"><label class="layui-form-label">姓名:</label></td>
+                <td style="padding-left:60px;padding-bottom:30px;"><input type="text" name="E_Name" placeholder="请输入姓名" class="layui-input"></td>
             </tr>
             <tr>
-                <td><label class="layui-form-label">部门</label></td>
-                <td>
+                <td style="padding-bottom:30px;"><label class="layui-form-label">部门:</label></td>
+                <td style="padding-left:60px;padding-bottom:30px;">
                     <select id="Select1" name="DepartMentId" class="layui-input" >
-                        <option>请选择</option>
+                        <option>请选择部门</option>
                     </select>
                 </td>
             </tr>
             <tr>
-                <td>
-                    <label class="layui-form-label">账号</label>
+                <td style="padding-bottom:30px;">
+                    <label class="layui-form-label">账号:</label>
                 </td>
-                <td>
+                <td style="padding-left:60px;padding-bottom:30px;">
                     <input type="text" name="E_Account" placeholder="请输入账号" class="layui-input">
                 </td>
             <tr>
-                <td>
-                    <label class="layui-form-label">密码</label>
+                <td style="padding-bottom:30px;">
+                    <label class="layui-form-label">密码:</label>
                 </td>
-                <td>
+                <td style="padding-left:60px;padding-bottom:30px;">
                     <input type="password" name="E_Pwd" placeholder="请输入密码" class="layui-input">
                 </td>
             </tr>
             <tr>
             <tr>
-                <td><label class="layui-form-label">图片</label></td>
-                <td><input id="File1" type="file" name="E_Img" /></td>
+                <td style="padding-bottom:30px;"><label class="layui-form-label">图片:</label></td>
+                <td style="padding-left:60px;padding-bottom:30px;"><input id="File1" type="file" name="E_Img" /></td>
             </tr>
             <tr>
-                <td>
-                    <label class="layui-form-label">性别</label>
+                <td style="padding-bottom:30px;">
+                    <label class="layui-form-label">性别:</label>
                 </td>
-                <td>
+                <td style="padding-left:60px;padding-bottom:30px;">
                     <input type="radio" name="E_Sex" value="0" title="男" checked="">男
                     <input type="radio" name="E_Sex" value="1" title="女">女
                 </td>
             </tr>
             <tr>
-                <td>
-                    <label class="layui-form-label">手机</label>
+                <td style="padding-bottom:30px;">
+                    <label class="layui-form-label">手机:</label>
                 </td>
-                <td>
+                <td style="padding-left:60px; padding-bottom:30px;">
                     <input type="text" name="E_Phone" placeholder="请输入手机" class="layui-input">
                 </td>
             </tr>
             <tr>
                 <td></td>
-                <td>
+                <td style="padding-left:60px;padding-bottom:30px;">
                     <input type="submit" class="layui-btn" lay-submit="/WangLuChao/AddEmployees" v-on:click='dataSubmit' value="立即提交" id="gooods" />
                 </td>
             </tr>

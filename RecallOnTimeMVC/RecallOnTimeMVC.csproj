@@ -165,6 +165,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="chao\html5-canvas-crystal-ball\js\index.js" />
+    <Content Include="chao\html5-canvas-crystal-ball\js\JavaScript.js" />
+    <Content Include="chao\html5-canvas-crystal-ball\js\regl.min.js" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -1179,6 +1182,7 @@
     <Content Include="html5-canvas-chart-js\html5-canvas-chart-js\fonts\icomoon.eot" />
     <Content Include="html5-canvas-chart-js\html5-canvas-chart-js\fonts\icomoon.ttf" />
     <Content Include="html5-canvas-chart-js\html5-canvas-chart-js\fonts\icomoon.woff" />
+    <Content Include="chao\html5-canvas-crystal-ball\babel\index.babel" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -1233,6 +1237,7 @@
     <Content Include="Views\WangLuChao\ShowComment.cshtml" />
     <Content Include="Views\WangLuChao\ShowFinace.cshtml" />
     <Content Include="Views\WangLuChao\XiuMiMa.cshtml" />
+    <Content Include="Views\WangLuChao\showActivity.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
