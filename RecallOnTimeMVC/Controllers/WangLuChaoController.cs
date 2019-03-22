@@ -177,12 +177,20 @@ namespace RecallOnTimeMVC.Controllers
             List<Finance> ss = JsonConvert.DeserializeObject<List<Finance>>(fin);
             return JsonConvert.SerializeObject(ss);
         }
+        /// <summary>
+        /// 修改密码
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public ActionResult XiuMiMa()
         {
             var employee = Session["User"];
             Employee em = employee as Employee;
             return View(em);
+        }
+        public ActionResult showActivity()
+        {
+            return View();
         }
     }
 }
