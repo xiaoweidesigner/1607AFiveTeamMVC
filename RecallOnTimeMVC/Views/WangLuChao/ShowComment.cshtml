@@ -12,6 +12,7 @@
         <tr>
             <td>编号</td>
             <td>顾客</td>
+            <td>相关电影</td>
             <td>评论内容</td>
             <td>评论时间</td>
             <td>操作</td>
@@ -43,7 +44,7 @@
                                , thisData = data.concat().splice(obj.curr * obj.limit - obj.limit, obj.limit);
                                     layui.each(thisData, function (index, item)
                                     {
-                                        arr.push('<tr><td>' + item.CoId + '</td><td>' + item.Custom.C_Name + '</td><td>' + item.Details + '</td><td>' + item.C_Time + "<td><button class='layui-btn layui-btn-normal layui-btn-sm' onclick='ji(" + item.CoId+ ")' ><i class='layui-icon'></i>删除信息</button></td></tr >");
+                                        arr.push('<tr><td>' + item.CoId + '</td><td>' + item.Custom.C_Name + '</td><td>' + item.Movie.M_Name + '</td><td>' + item.Details + '</td><td>' + item.C_Time + "<td><button class='layui-btn layui-btn-normal layui-btn-sm' onclick='ji(" + item.CoId + ")' ><i class='layui-icon'></i>删除信息</button></td></tr >");
                               });
                                     return arr.join('');
                                 }();

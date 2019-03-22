@@ -5,7 +5,14 @@
 }
 
 <table class="layui-table" lay-skin="line">
-
+    <colgroup>
+        <col width="20">
+        <col width="50">
+        <col width="70">
+        <col width="100">
+        <col width="300">
+        <col width="50">
+    </colgroup>
     <thead>
         <tr>
             <th>编号</th>
@@ -54,7 +61,7 @@
                                         page += "<tr>";
                                         page += "<td>" + item.MId + "</td>";
                                         page += "<td>" + item.M_Name + "</td>";
-                                        page += "<td><img src='" + item.M_Img + "' alt='' style='width:50px;height:50px;' /></td>";
+                                        page += "<td><img src='" + item.M_Img + "' alt='' style='width:100px;height:100px;' /></td>";
                                         page += "<td>" + item.M_Grade + "</td>";
                                         page += jia;
                                         page += "<td>" + item.M_Price + "</td>";
