@@ -64,17 +64,17 @@
                 <td style="width:150px;">版本</td>
                 <td>
                     <div class="layui-input-block">
-                        <input type="radio" name="M_Region" value="2D" title="2D" checked="">
-                        <input type="radio" name="M_Region" value="3D" title="3D">
-                        <input type="radio" name="M_Region" value="中文" title="中文">
-                        <input type="radio" name="M_Region" value="英文" title="英文">
+                        <input type="radio" name="M_Region" value="2D中文版" title="2D中文版" checked="">
+                        <input type="radio" name="M_Region" value="2D英文版" title="2D英文版">
+                        <input type="radio" name="M_Region" value="3D中文版" title="3D中文版">
+                        <input type="radio" name="M_Region" value="3D英文版" title="3D英文版">
                     </div>
                 </td>
             </tr>
             <tr>
                 <td style="width:150px;">上映时间</td>
                 <td>
-                    <input type="text" name="M_Show" id="date1" autocomplete="off" class="layui-input">
+                    <input type="text" name="M_Show" id="M_Show" autocomplete="off" class="layui-input">
                 </td>
             </tr>
             <tr>
@@ -131,6 +131,11 @@
         //日期
         laydate.render({
             elem: '#date1'
+        });
+
+        //日期
+        laydate.render({
+            elem: '#M_Show'
         });
     });
 </script>

@@ -160,11 +160,11 @@ namespace RecallOnTimeMVC.Controllers
             string i = HttpClientHelper.SendRequest("api/Lmq/AddMovieHall", "post", str);
             if (i == "1")
             {
-                return "<script>alert('添加成功');location.href='/LmqMVC/AddMovieHall';</script>";
+                return "<script>alert('添加成功');location.href='/LmqMVC/ShowMovieHall';</script>";
             }
             else
             {
-                return "<script>alert('添加失败');location.href='/LmqMVC/AddMovieHall';</script>";
+                return "<script>alert('添加失败');location.href='/LmqMVC/ShowMovieHall';</script>";
             }
         }
 

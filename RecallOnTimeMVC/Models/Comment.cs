@@ -17,6 +17,7 @@ namespace RecallOnTimeMVC.Models
         public int CustomId { get; set; }//顾客表外键
         public string Details { get; set; }//评论内容
         public DateTime C_Time { get; set; }//评论时间
+        [ForeignKey("Movie")]
         public int MovieId { get; set; }//电影外键
 
         public Movie Movie { get; set; }
