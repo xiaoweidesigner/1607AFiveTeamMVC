@@ -15,5 +15,6 @@ namespace RecallOnTimeMVC.Models
         public string CName { get; set; }
         public DateTime BeginTime { get; set; }
         public string Phone { get; set; }
+        public string SeatContent { get; set; }
     }
 }

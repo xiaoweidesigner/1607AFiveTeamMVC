@@ -21,7 +21,7 @@ namespace RecallOnTimeMVC.Models
         public int O_State { get; set; }//状态   1已处理 2未处理   影院用
         public int CO_State { get; set; }//顾客订单状态  1、订票  2、退票 3、已使用 
         public DateTime O_STime { get; set; }//下单时间
-
+        public string SeatContent { get; set; }//座位信息  放映厅名称+座位号
         public SessionS SessionS { get; set; }
         public Custom Custom { get; set; }
     }

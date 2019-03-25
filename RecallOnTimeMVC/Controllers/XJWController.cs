@@ -28,7 +28,7 @@ namespace RecallOnTimeMVC.Controllers
         {
             string jsonResult = HttpClientHelper.SendRequest($"api/Zhizhi/ShowOrder", "get");
             List<Order> list = JsonConvert.DeserializeObject<List<Order>>(jsonResult);
-            list = list.Where(s => s.O_State == 0).ToList();
+            list = list.Where(s => s.O_State == 2).ToList();
             return list.Count;
         }
         #endregion
