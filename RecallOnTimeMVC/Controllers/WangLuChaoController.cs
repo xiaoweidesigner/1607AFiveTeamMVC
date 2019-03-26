@@ -192,5 +192,11 @@ namespace RecallOnTimeMVC.Controllers
         {
             return View();
         }
+        public ActionResult tion()
+        {
+
+            return View();
+        
+        }
     }
 }

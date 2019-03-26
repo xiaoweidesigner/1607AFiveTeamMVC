@@ -1249,6 +1249,7 @@
     <Content Include="Views\Zhi\shuju.cshtml" />
     <Content Include="Views\XJW\IndexHome.cshtml" />
     <Content Include="Views\WangLuChao\showActivity.cshtml" />
+    <Content Include="Views\WangLuChao\tion.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

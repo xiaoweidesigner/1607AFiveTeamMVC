@@ -1,0 +1,58 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv=Content-Type content="text/html;charset=utf-8">
+</head>
+<body>
+</body>
+<script>
+	var clickCount = 0;
+    document.onclick = function(e) {
+
+		@**
+		 * 根据鼠标点击坐标初始化dom，通过过渡属性实现动画效果
+		 * dom渲染完成后设置目标偏移位置及目标透明度
+		 * 过渡结束后移除dom
+		 * @author: slzs;
+		 */*@
+        var symbol = document.createElement("b");
+
+        symbol.style.position = "absolute";
+		symbol.style.left = (e.pageX - 10) + "px";
+        symbol.style.top = (e.pageY - 15) + "px";
+        symbol.style.zIndex = 9999;
+        symbol.style.userSelect = "none"; // 禁止文本被选中，影响美观
+        symbol.style.fontSize = "18px";
+        symbol.style.color = `rgb(${Math.floor(Math.random()*256)},${Math.floor(Math.random()*256)},${Math.floor(Math.random()*256)})`; // 随机颜色
+		symbol.style.transition="all 1.5s";
+		symbol.addEventListener("transitionend",function(et){ // 动画结束移除dom
+			if(et.propertyName == "opacity" && et.srcElement.style.opacity==0)
+				et.srcElement.remove();
+		});
+
+		// 轮换几个预制字符
+		switch(++clickCount){
+			case 1:
+		        symbol.innerText = "✔";
+				break;
+			case 2:
+		        symbol.innerText = "❤";
+				break;
+			default:
+		        symbol.innerText = "☺";
+				clickCount = 0;
+		}
+        document.body.appendChild(symbol);
+
+        requestAnimationFrame(()=>{
+	        symbol.style.top = (e.pageY - 100) + "px";
+            symbol.style.opacity = 0;
+        });
+    };
+</script>
+</html>
